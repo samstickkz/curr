@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../UI/auth/login/login.ui.dart';
 import '../UI/auth/register/register.ui.dart';
+import '../UI/home/bottom_navigation.ui.dart';
 import '../UI/onboarding/main_onboarding.dart';
 import '../UI/splash/spalsh_screen.dart';
 import '../core/services/local_services/app-cache.dart';
@@ -14,8 +15,8 @@ class Routers {
     switch (settings.name) {
     // case HomeRoute:
     //   return MaterialPageRoute(builder: (_) => const BottomNavPage());
-    //   case walletHomeRoute:
-    //     return MaterialPageRoute(builder: (_) => const WalletHome());
+      case walletHomeRoute:
+        return MaterialPageRoute(builder: (_) => const WalletHome());
       case onBoardingScreen:
         return MaterialPageRoute(builder: (_) => const WalletHome());
       case splashScreenRoute:
@@ -26,8 +27,8 @@ class Routers {
     //     return MaterialPageRoute(builder: (_) => const ResetPassword());
       case registerRoute:
         return MaterialPageRoute(builder: (_) => const RegisterPage());
-    //   case bottomNavigationRoute:
-    //     return MaterialPageRoute(builder: (_) => const BottomNavigationScreen());
+      case bottomNavigationRoute:
+        return MaterialPageRoute(builder: (_) => const BottomNavigationScreen());
     //   case loginWithPinRoute:
     //     return MaterialPageRoute(builder: (_) => const CheckPinScreen());
     //   case drawEntryPointRoute:
