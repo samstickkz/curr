@@ -33,7 +33,10 @@ class LoginViewModel extends BaseViewModel{
 
     try {
       startLoader();
-      Either<ResModel, ResModel> res = await repository.login(email: emailController.text.trim(), password: passwordController.text.trim());
+      Either<ResModel, ResModel> res = await repository.login(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim()
+      );
       if (res.isRight()) {
         ResModel response = res.asRight();
         stopLoader();
