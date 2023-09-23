@@ -2,6 +2,8 @@ import 'package:curr/utils/dartz.x.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 
+import '../../../constants/constants.dart';
+import '../../../core/models/login_response.dart';
 import '../../../core/models/response_model.dart';
 import '../../../routes/routes.dart';
 import '../../../utils/snack_message.dart';
@@ -33,14 +35,16 @@ class LoginViewModel extends BaseViewModel{
 
     try {
       startLoader();
-      Either<ResModel, ResModel> res = await repository.login(
+      Either<ResModel, LoginResponse> res = await repository.login(
           email: emailController.text.trim(),
           password: passwordController.text.trim()
       );
       if (res.isRight()) {
-        ResModel response = res.asRight();
+        LoginResponse response = res.asRight();
         stopLoader();
         showCustomToast(response.message??"", success: true);
+        storageService.storeItem(key: accessToken, value: response.data?.token);
+        await initializer.init();
         navigationService.navigateTo(bottomNavigationRoute);
         stopLoader();
         notifyListeners();

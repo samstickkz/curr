@@ -9,8 +9,8 @@ import 'navigations/profile/profile.home.ui.dart';
 
 class BottomNavigationViewModel extends BaseViewModel{
 
-  late AnimationController controller;
-  late Animation<double> animation;
+  // late AnimationController controller;
+  // late Animation<double> animation;
 
   ValueNotifier<int>pageIndex = ValueNotifier(0);
 

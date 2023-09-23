@@ -37,6 +37,8 @@ class Initializer {
     if (value != null && value.isNotEmpty) {
       isLoggedIn = true;
       await locator<UserService>().getLocalUser();
+    }else{
+      isLoggedIn = false;
     }
   }
 

@@ -1,4 +1,6 @@
 import 'package:curr/utils/widget_extensions.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../constants/constants.dart';
@@ -43,22 +45,22 @@ class _RegisterPageState extends State<RegisterPage> {
                         ],
                       ),
                       20.0.sbH,
-                      AppTextField(
-                        hint: "Full name",
-                        keyboardType: TextInputType.visiblePassword,
-                        controller: model.fullNameController,
-                        autofillHints: const [AutofillHints.givenName, AutofillHints.middleName, AutofillHints.familyName],
-                        validator: (val){
-                          String value = val??"";
-                          if (!validateFullName(value.trim())) {
-                            return "Invalid full name";
-                          }
-                        },
-                        onChanged: (val){
-                          model.formKey.currentState?.validate();
-                        },
-                      ),
-                      15.0.sbH,
+                      // AppTextField(
+                      //   hint: "Full name",
+                      //   keyboardType: TextInputType.visiblePassword,
+                      //   controller: model.fullNameController,
+                      //   autofillHints: const [AutofillHints.givenName, AutofillHints.middleName, AutofillHints.familyName],
+                      //   validator: (val){
+                      //     String value = val??"";
+                      //     if (!validateFullName(value.trim())) {
+                      //       return "Invalid full name";
+                      //     }
+                      //   },
+                      //   onChanged: (val){
+                      //     model.formKey.currentState?.validate();
+                      //   },
+                      // ),
+                      // 15.0.sbH,
                       AppTextField(
                         hint: "Email Address",
                         keyboardType: TextInputType.emailAddress,
@@ -99,6 +101,35 @@ class _RegisterPageState extends State<RegisterPage> {
                           model.formKey.currentState?.validate();
                         },
                         isPassword: true,
+                      ),
+                      15.0.sbH,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          CupertinoCheckbox(value: model.isActive, onChanged: model.changeStatus, activeColor: primaryColor,),
+                          16.0.sbH,
+                          Expanded(child: RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'I have read and accepted the ',
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: 'Terms and Conditions',
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    color: primaryColor,
+                                  ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = (){}, // Add tap gesture recognizer
+                                ),
+                              ],
+                            ),
+                          ))
+                        ],
                       ),
                       15.0.sbH,
                       Row(

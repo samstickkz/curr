@@ -36,6 +36,8 @@ class BaseViewModel extends ChangeNotifier {
   popLogout(BuildContext context){
     showBottomSheet(
         context: context,
+        backgroundColor: Colors.black.withOpacity(0.7),
+        enableDrag: false,
         builder: (BuildContext context) => ActionBottomSheet(
           onTap:logout,
           title: "Logout",

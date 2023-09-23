@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 
 import '../../locator.dart';
+import '../models/login_response.dart';
 import '../models/response_model.dart';
 import '../services/local_services/app-cache.dart';
 import '../services/local_services/initializer.dart';
@@ -22,7 +23,7 @@ class Repository {
     return await authApi.register(email: email, password: password, activationUrl: activationUrl, acceptPolicy: acceptPolicy);
   }
 
-  Future<Either<ResModel, ResModel>> login({required String email, required String password
+  Future<Either<ResModel, LoginResponse>> login({required String email, required String password
   }) async {
     return await authApi.login(email: email, password: password);
   }

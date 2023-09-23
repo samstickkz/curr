@@ -1,3 +1,5 @@
+import 'package:curr/constants/constants.dart';
+import 'package:curr/routes/routes.dart';
 import 'package:curr/utils/dartz.x.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +15,12 @@ class RegisterViewModel extends BaseViewModel {
   final confirmPasswordController = TextEditingController();
 
   bool success = false;
+  bool isActive = false;
+
+  void changeStatus(bool? val){
+    isActive = val!;
+    notifyListeners();
+  }
 
   @override
   void dispose() {
@@ -29,12 +37,16 @@ class RegisterViewModel extends BaseViewModel {
     if (formKey.currentState!.validate()){
       startLoader();
       try{
-        Either<ResModel, ResModel> res =  await repository.register(email: emailController.text.trim(), password: passwordController.text.trim(), activationUrl: "", acceptPolicy: false);
+        Either<ResModel, ResModel> res =  await repository.register(
+            email: emailController.text.trim(),
+            password: passwordController.text.trim(),
+            activationUrl: "${baseUrl}Auth/confirm-email",
+            acceptPolicy: isActive
+        );
         if (res.isRight()) {
           ResModel response = res.asRight();
-          stopLoader();
+          navigationService.goBack();
           showCustomToast(response.message??"", success: true);
-          // navigationService.navigateTo(bottomNavigationRoute);
           stopLoader();
           notifyListeners();
         } else {

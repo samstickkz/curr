@@ -34,7 +34,7 @@ class ProfileHomeScreen extends StatelessWidget {
                     Column(
                       children: [
                         ClipRRect(
-                          child: Image.network(model.userService.userCredentials.profilePhoto??"", height: 80, width: 80, fit: BoxFit.cover,),
+                          // child: Image.network("", height: 80, width: 80, fit: BoxFit.cover,),
                           borderRadius: BorderRadius.circular(40),
                         ),
                       ],
@@ -57,8 +57,8 @@ class ProfileHomeScreen extends StatelessWidget {
                                       backgroundColor: Colors.greenAccent.withOpacity(0.2),
                                       radius: 30,
                                       expandable: true,
-                                      child: AppText("KYC Verified", color: Colors.lightGreenAccent,),
                                       padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                                      child: AppText("KYC Verified", color: Colors.lightGreenAccent,),
                                     ),
                                     Expanded(child: SizedBox())
                                   ],
@@ -109,6 +109,7 @@ class ProfileHomeScreen extends StatelessWidget {
               20.0.sbH,
               const AppText("Others", size: 15,),
               10.0.sbH,
+              ProfileCard(svgImage: model.account[0].svgImage??"", title: model.account[0].title??"", onTap:()=> model.popLogout(context),),
               ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
@@ -116,12 +117,8 @@ class ProfileHomeScreen extends StatelessWidget {
                   itemBuilder: (_,i)=> ProfileCard(svgImage: model.others[i].svgImage??"", title: model.others[i].title??"", onTap: model.others[i].onTap,)
               ),
               20.0.sbH,
-              ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: model.account.length,
-                  itemBuilder: (_,i)=> ProfileCard(svgImage: model.account[i].svgImage??"", title: model.account[i].title??"", onTap: model.account[i].onTap, isLogout: model.account[i].isLogout,)
-              ),
+              ProfileCard(svgImage: model.account[0].svgImage??"", title: model.account[0].title??"", onTap:()=> model.popLogout(context),),
+              ProfileCard(svgImage: model.account[1].svgImage??"", title: model.account[1].title??"", isLogout: true , onTap: (){},),
               30.0.sbH
             ],
           ),
