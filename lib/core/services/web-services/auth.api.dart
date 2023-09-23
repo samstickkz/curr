@@ -8,6 +8,7 @@ import '../../../constants/reuseables.dart';
 import '../../../locator.dart';
 import '../../../routes/routes.dart';
 import '../../models/loggedi_in_user.dart';
+import '../../models/login_response.dart';
 import '../../models/response_model.dart';
 import '../local_services/storage-service.dart';
 import '../local_services/user.service.dart';
@@ -18,7 +19,7 @@ class AuthenticationApiService {
   StorageService storageService = locator<StorageService>();
   UserService userService = locator<UserService>();
 
-  Future<Either<ResModel, ResModel>> login({
+  Future<Either<ResModel, LoginResponse>> login({
     required String email,
     required String password
   }) async {
@@ -30,7 +31,7 @@ class AuthenticationApiService {
 
       ResModel resModel = resModelFromJson(response.data);
       if(resModel.successful==true){
-        return Right(ResModel.fromJson(jsonDecode(response.data)));
+        return Right(LoginResponse.fromJson(jsonDecode(response.data)));
       }else{
         return Left(ResModel.fromJson(jsonDecode(response.data)));
       }
