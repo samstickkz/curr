@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import '../../../../locator.dart';
+import '../../../../routes/routes.dart';
 import '../../../base.vm.dart';
 import 'buy_token/buy.token.ui.dart';
 
 class HomePageViewModel extends BaseViewModel{
 
-  HomePageViewModel(){
-    init();
-  }
-
-  init()async{
+  init(BuildContext contexts)async{
+    context = contexts;
     // await fetchCryptoPrice();
   }
+
+  late BuildContext context;
 
 
 
@@ -43,17 +43,20 @@ class HomePageViewModel extends BaseViewModel{
   //   }
   // }
 
-  ScrollController scrollController = ScrollController();
+  navigateToBalance(){
+    navigationService.navigateTo(buyBal);
+  }
 
-  popBuyToken(BuildContext context){
+
+  popBuyToken(){
     showBottomSheet(
       context: context,
-      builder: (BuildContext context) {
+      builder: (_) {
         return DraggableScrollableSheet(
           initialChildSize: 0.9,
           minChildSize: 0.6,
           maxChildSize: 0.9,
-          builder: (context, scrollController){
+          builder: (_, scrollController){
             return const BuyTokenScreen();
           }
         );

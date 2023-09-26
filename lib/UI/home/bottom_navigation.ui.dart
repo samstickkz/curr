@@ -22,47 +22,28 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen>  with S
     return BaseView<BottomNavigationViewModel>(
       onModelReady: (m) async {
 
-        // m.controller = AnimationController(
-        //   vsync: this,
-        //   duration: const Duration(milliseconds: 500),
-        // );
-        //
-        // m.animation = Tween(begin: 0.0, end: 1.0).animate(
-        //   CurvedAnimation(
-        //     parent: m.controller,
-        //     curve: Curves.easeInOutBack, // Choose an appropriate curve for bouncing
-        //   ),
-        // );
-        // m.controller.repeat(reverse: true);
-
-        // SharedPreferences prefs = await SharedPreferences.getInstance();
-        // bool isFirstTime = prefs.getBool('isFirstTime') ?? true;
-        // m.appCache.firstTimeKYC = true;
       },
       builder: (_, model, child) {
-        return WillPopScope(
-          onWillPop:()=> model.willPop(context),
-          child: Stack(
-            children: [
-              Scaffold(
-                  body: model.pages[model.currentIndex],
-                  bottomNavigationBar: _BottomNavigationBar(
-                    onItemSelected: model.changePage,
-                  ),
-              ),
-              Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                      padding: const EdgeInsets.only(bottom: 60),
-                      child: FloatingActionButton(
-                        onPressed: model.navigateToDraw,
-                        backgroundColor: primaryColor,
-                        child: SvgPicture.asset(AppImages.stars, height: 24, width: 24, color: Colors.black, fit: BoxFit.cover,),
-                      )
-                  )
-              ),
-            ],
-          ),
+        return Stack(
+          children: [
+            Scaffold(
+                body: model.pages[model.currentIndex],
+                bottomNavigationBar: _BottomNavigationBar(
+                  onItemSelected: model.changePage,
+                ),
+            ),
+            Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                    padding: const EdgeInsets.only(bottom: 60),
+                    child: FloatingActionButton(
+                      onPressed: model.navigateToDraw,
+                      backgroundColor: primaryColor,
+                      child: SvgPicture.asset(AppImages.stars, height: 24, width: 24, color: Colors.black, fit: BoxFit.cover,),
+                    )
+                )
+            ),
+          ],
         );
       },
     );

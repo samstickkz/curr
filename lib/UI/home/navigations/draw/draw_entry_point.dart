@@ -23,25 +23,25 @@ class _DrawEntryPointScreenState extends State<DrawEntryPointScreen> with Single
   Widget build(BuildContext context) {
     return BaseView<DrawEntryPointViewModel>(
       onModelReady: (model){
-        model.controller = AnimationController(
-          vsync: this,
-          duration: const Duration(milliseconds: 500),
-        );
+        // model.controller = AnimationController(
+        //   vsync: this,
+        //   duration: const Duration(milliseconds: 500),
+        // );
 
-        model.animation = Tween(begin: 0.0, end: 1.0).animate(
-          CurvedAnimation(
-            parent: model.controller,
-            curve: Curves.easeInOutBack, // Choose an appropriate curve for bouncing
-          ),
-        );
+        // model.animation = Tween(begin: 0.0, end: 1.0).animate(
+        //   CurvedAnimation(
+        //     parent: model.controller,
+        //     curve: Curves.easeInOutBack, // Choose an appropriate curve for bouncing
+        //   ),
+        // );
 
-        model.controller.repeat(reverse: true);
+        // model.controller.repeat(reverse: true);
 
-        model.startConfetti();
+        // model.startConfetti();
       },
       onDisposeReady: (model){
-        model.controller.dispose();
-        model.confettiController.dispose();
+        // model.controller.dispose();
+        // model.confettiController.dispose();
       },
       builder: (_, model, child)=> Scaffold(
         appBar: AppBar(
@@ -50,15 +50,15 @@ class _DrawEntryPointScreenState extends State<DrawEntryPointScreen> with Single
         body: SafeArea(
           child: Stack(
             children: [
-              SizedBox(
-                child: ConfettiWidget(
-                  confettiController: model.confettiController,
-                  blastDirectionality: BlastDirectionality.explosive,
-                  numberOfParticles: 20,
-                  colors: [Colors.blue.withOpacity(0.2), primaryColor.withOpacity(0.2), Colors.purple.withOpacity(0.2), Colors.yellow.withOpacity(0.2), Colors.orange.withOpacity(0.2),],
-                  shouldLoop: true, // Set to true for repeating animation
-                ),
-              ),
+              // SizedBox(
+              //   child: ConfettiWidget(
+              //     confettiController: model.confettiController,
+              //     blastDirectionality: BlastDirectionality.explosive,
+              //     numberOfParticles: 20,
+              //     colors: [Colors.blue.withOpacity(0.2), primaryColor.withOpacity(0.2), Colors.purple.withOpacity(0.2), Colors.yellow.withOpacity(0.2), Colors.orange.withOpacity(0.2),],
+              //     shouldLoop: true, // Set to true for repeating animation
+              //   ),
+              // ),
               Container(
                 height: height(context),
                 width: width(context),
@@ -69,16 +69,7 @@ class _DrawEntryPointScreenState extends State<DrawEntryPointScreen> with Single
                     Column(
                       children: [
                         60.0.sbH,
-                        AnimatedBuilder(
-                          animation: model.animation,
-                          builder: (context, child) {
-                            return Transform.translate(
-                              offset: Offset(0.0, -10 * model.animation.value), // Adjust the offset value
-                              child: child,
-                            );
-                          },
-                          child: Image.asset(AppImages.dollarBags, height: 200, width: 200,),
-                        ),
+                        Image.asset(AppImages.dollarBags, height: 200, width: 200,),
                       ],
                     ),
                     Column(
