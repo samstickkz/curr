@@ -5,13 +5,13 @@ import '../../../base.vm.dart';
 
 class DrawEntryPointViewModel extends BaseViewModel{
 
-  late AnimationController controller;
-  late Animation<double> animation;
-
-  ConfettiController confettiController = ConfettiController();
-
-  void startConfetti() {
-    confettiController.play();
-  }
+  // late AnimationController controller;
+  // late Animation<double> animation;
+  //
+  // ConfettiController confettiController = ConfettiController();
+  //
+  // void startConfetti() {
+  //   confettiController.play();
+  // }
 
 }

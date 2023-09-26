@@ -109,13 +109,13 @@ class ProfileHomeScreen extends StatelessWidget {
               20.0.sbH,
               const AppText("Others", size: 15,),
               10.0.sbH,
-              ProfileCard(svgImage: model.account[0].svgImage??"", title: model.account[0].title??"", onTap:()=> model.popLogout(context),),
-              ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: model.others.length,
-                  itemBuilder: (_,i)=> ProfileCard(svgImage: model.others[i].svgImage??"", title: model.others[i].title??"", onTap: model.others[i].onTap,)
-              ),
+              ProfileCard(svgImage: model.others[0].svgImage??"", title: model.others[0].title??"", onTap:(){},),
+              // ListView.builder(
+              //     shrinkWrap: true,
+              //     physics: const NeverScrollableScrollPhysics(),
+              //     itemCount: model.others.length,
+              //     itemBuilder: (_,i)=> ProfileCard(svgImage: model.others[i].svgImage??"", title: model.others[i].title??"", onTap: model.others[i].onTap,)
+              // ),
               20.0.sbH,
               ProfileCard(svgImage: model.account[0].svgImage??"", title: model.account[0].title??"", onTap:()=> model.popLogout(context),),
               ProfileCard(svgImage: model.account[1].svgImage??"", title: model.account[1].title??"", isLogout: true , onTap: (){},),

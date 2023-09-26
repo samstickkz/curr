@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import '../../routes/routes.dart';
 import '../base.vm.dart';
 import 'navigations/home/home.ui.dart';
+import 'navigations/home/wallet/portfolio.dart';
+import 'navigations/home/wallet/wallet_deposit.dart';
 import 'navigations/profile/profile.home.ui.dart';
 
 class BottomNavigationViewModel extends BaseViewModel{
@@ -24,8 +26,8 @@ class BottomNavigationViewModel extends BaseViewModel{
 
   late List<Widget> pages =const [
     HomePage(),
-    Scaffold(),
-    Scaffold(),
+    WalletDeposit(),
+    PortFolio(),
     ProfileHomeScreen()
   ];
 
