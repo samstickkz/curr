@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:curr/core/models/user.dart';
+import 'package:curr/utils/snack_message.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
@@ -24,53 +26,64 @@ class AuthenticationApiService {
     required String password
   }) async {
     try {
-      var response = await connect().post("Auth/login", data: {
+      var response = await connect().post("tokens", data: {
         "email": email,
         "password": password,
       });
-
-      ResModel resModel = resModelFromJson(response.data);
-      if(resModel.successful==true){
-        return Right(LoginResponse.fromJson(jsonDecode(response.data)));
-      }else{
-        return Left(ResModel.fromJson(jsonDecode(response.data)));
-      }
+      print("Here");
+      return Right(LoginResponse.fromJson(jsonDecode(response.data)));
+    } on DioError catch (e) {
+      print("Now Here");
+      return Left(resModelFromJson(e.response?.data));
     } catch (e) {
-      return Left(ResModel(message: e.toString()));
+      print("Definately Here");
+      return Left(ResModel(messages: [e.toString()]));
     }
   }
 
-  Future<Either<ResModel, ResModel>> register({
+  Future<User?> getUser()async{
+    try{
+      var response = await connect().get("personal/profile");
+      User user = User.fromJson(jsonDecode(response.data));
+      return user;
+    } on DioError catch(err){
+      print(err);
+      return null;
+    } catch(err){
+      print(err);
+      return null;
+    }
+  }
+
+  Future<Either<ResModel, String>> register({
     required String email,
     required String password,
-    required String activationUrl,
-    required bool acceptPolicy,
+    required String firstName,
+    required String lastName,
+    required String userName,
+    required String phoneNumber,
+    required String confirmPassword,
   }) async {
     try {
-      print(NetworkConfig.BASE_URL);
-      var response = await connect().post("Auth/signup", data: {
+      Response response = await connect().post("users/self-register", data: {
         "email": email,
         "password": password,
-        "acceptpolicy": acceptPolicy,
-        "activationUrl": activationUrl,
+        "confirmPassword": confirmPassword,
+        "userName": userName,
+        "firstName": firstName,
+        "lastName": lastName,
+        "phoneNumber": phoneNumber,
       });
 
-      ResModel resModel = resModelFromJson(response.data);
-      if(resModel.successful==true){
-        return Right(ResModel.fromJson(jsonDecode(response.data)));
+      if(response.statusCode==200){
+        return Right("Successful");
       }else{
-        return Left(ResModel.fromJson(jsonDecode(response.data)));
+        showCustomToast(response.data["messages"][0]);
+        return Left(resModelFromJson(response.data));
       }
     } catch (e) {
-      return Left(ResModel(message: e.toString()));
+      return Left(ResModel(messages: [e.toString()]));
     }
-  }
-
-  storeToken(String? token, {bool saveUser = true}) async {
-    //store token
-    storageService.storeItem(key: accessToken, value: token);
-    String tokens = await storageService.readItem(key: accessToken);
-    print("Access Token : $tokens");
   }
 
   Map<String, dynamic> filterNullValues(Map<String, dynamic> data) {

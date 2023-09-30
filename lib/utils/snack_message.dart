@@ -8,50 +8,34 @@ import '../constants/palette.dart';
 Widget toast(String message, {bool? success}) {
   return
     Padding(
-    padding: const EdgeInsets.all(20),
-    child: Align(
-      alignment: Alignment.bottomCenter,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(4.0),
+      padding: const EdgeInsets.only(top: 55),
+      child: Align(
+        alignment: Alignment.topCenter,
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
           width: double.infinity,
-          height: 60.0,
+          // height: 40.0,
           color:
           !success! ? Colors.red : primaryColor,
-          child: Column(
+          child: Row(
             children: [
+              if (!success) const Icon(Icons.error_outline, color: Colors.white,
+                size: 24,),
+              10.0.sbW,
               Expanded(
-                child: Row(
-                  children: [
-                    if (!success) const Icon(Icons.error_outline, color: Colors.white,
-                      size: 24,),
-                    10.0.sbW,
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            message.toUpperCase(),
-                            style: TextStyle(
-                              color: !success ? Colors.white : Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 12.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                child: Text(
+                  message,
+                  style: TextStyle(
+                    color: !success ? Colors.white : Colors.black,
+                    fontSize: 13.0,
+                  ),
                 ),
               ),
             ],
           ),
         ),
       ),
-    ),
-  );
+    );
 }
 
 // styled! ?:

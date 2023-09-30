@@ -1,15 +1,19 @@
 import 'package:curr/constants/constants.dart';
 import 'package:curr/routes/routes.dart';
 import 'package:curr/utils/dartz.x.dart';
+import 'package:curr/utils/string-extensions.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../core/models/response_model.dart';
 import '../../../utils/snack_message.dart';
 import '../../base.vm.dart';
 
 class RegisterViewModel extends BaseViewModel {
-  final fullNameController = TextEditingController();
+  final firstNameController = TextEditingController();
+  final userNameController = TextEditingController();
+  final lastNameController = TextEditingController();
   final passwordController = TextEditingController();
   final emailController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -22,12 +26,17 @@ class RegisterViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  String? countryCode;
+  String? phoneNumber;
+
   @override
   void dispose() {
-    fullNameController.dispose();
-    passwordController.dispose();
-    emailController.dispose();
-    confirmPasswordController.dispose();
+    firstNameController.clear();
+    passwordController.clear();
+    emailController.clear();
+    confirmPasswordController.clear();
+    lastNameController.clear();
+    userNameController.clear();
 
     super.dispose();
   }
@@ -37,21 +46,23 @@ class RegisterViewModel extends BaseViewModel {
     if (formKey.currentState!.validate()){
       startLoader();
       try{
-        Either<ResModel, ResModel> res =  await repository.register(
+        Either<ResModel, String> res =  await repository.register(
             email: emailController.text.trim(),
             password: passwordController.text.trim(),
-            activationUrl: "${baseUrl}Auth/confirm-email",
-            acceptPolicy: isActive
+            firstName: firstNameController.text.trim(),
+            lastName: lastNameController.text.trim(),
+            userName: userNameController.text.trim(),
+            phoneNumber: trimPhone(phoneNumber),
+            confirmPassword: confirmPasswordController.text.trim()
         );
         if (res.isRight()) {
-          ResModel response = res.asRight();
+          String response = res.asRight();
           navigationService.goBack();
-          showCustomToast(response.message??"", success: true);
+          showCustomToast(response, success: true);
           stopLoader();
           notifyListeners();
         } else {
           ResModel response = res.asLeft();
-          showCustomToast(response.message??"");
           notifyListeners();
           stopLoader();
         }

@@ -29,7 +29,7 @@ class DrawerScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CircleAvatar(
-                    backgroundImage: CachedNetworkImageProvider("${userService.userCredentials.profilePhoto}"),
+                    backgroundImage: CachedNetworkImageProvider("${userService.userCredentials.imageUrl}"),
                     radius: 60,
                   )
                 ],
@@ -37,7 +37,7 @@ class DrawerScreen extends StatelessWidget {
               16.0.sbH,
               Row(
                 children: [
-                  Expanded(child: AppText(userService.userCredentials.name??"", size: 20, align: TextAlign.center,)),
+                  Expanded(child: AppText("${userService.userCredentials.firstName} ${userService.userCredentials.lastName}", size: 20, align: TextAlign.center,)),
                 ],
               ),
               10.0.sbH,

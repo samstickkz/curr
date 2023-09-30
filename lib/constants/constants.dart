@@ -9,6 +9,7 @@ const String token = 'token';
 const String userTypes = 'userTypes';
 const String userTypeData = 'userTypeData';
 const String accessToken = 'accessToken';
+const String expiryDate = 'expiryDate';
 const String isSecured = 'isSecure_text';
 const String refreshToken = 'refreshToken';
 const String currentUser = 'currentUser';

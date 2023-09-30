@@ -1,3 +1,4 @@
+import 'package:curr/core/models/user.dart';
 import 'package:curr/utils/dartz.x.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +31,24 @@ class LoginViewModel extends BaseViewModel{
     navigationService.navigateTo(registerRoute);
   }
 
+  Future<User?> getUser()async{
+    startLoader();
+    try{
+      var response = await repository.getUser();
+      await initializer.init();
+      navigationService.navigateTo(bottomNavigationRoute);
+      stopLoader();
+      notifyListeners();
+      return response;
+    }catch(err){
+      stopLoader();
+      notifyListeners();
+      return null;
+    }
+  }
 
-  Future<void> login() async {
+
+  login() async {
 
     try {
       startLoader();
@@ -41,25 +58,23 @@ class LoginViewModel extends BaseViewModel{
       );
       if (res.isRight()) {
         LoginResponse response = res.asRight();
-        stopLoader();
-        showCustomToast(response.message??"", success: true);
-        storageService.storeItem(key: accessToken, value: response.data?.token);
-        await initializer.init();
-        navigationService.navigateTo(bottomNavigationRoute);
+        await getUser();
         stopLoader();
         notifyListeners();
+        return null;
       } else {
         ResModel response = res.asLeft();
-        showCustomToast(response.message??"");
+        showCustomToast(response.messages.toString());
         notifyListeners();
         stopLoader();
+        return null;
       }
-
       notifyListeners();
     } catch (e) {
       notifyListeners();
       stopLoader();
       showCustomToast(e.toString());
+      return null;
     }
   }
 
