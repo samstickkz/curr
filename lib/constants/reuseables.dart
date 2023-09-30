@@ -105,3 +105,9 @@ class UrlPath {
   static const String login = 'auth/login';
   static const String user = 'auth/user/';
 }
+
+var textStyleDefault = TextStyle(
+  color: const Color(0xFFF2F2FA),
+  fontSize: 15,
+  fontFamily: 'Inter',
+);

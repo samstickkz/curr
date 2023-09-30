@@ -1,37 +1,39 @@
 import 'dart:convert';
+import 'package:curr/core/repository/repository.dart';
 import 'package:flutter/material.dart';
 import '../../../constants/constants.dart';
 import '../../../locator.dart';
 import '../../models/loggedi_in_user.dart';
+import '../../models/user.dart';
 import 'storage-service.dart';
 
 
 class UserService {
   late Locale myLocale;
-  SaveUser userCredentials = SaveUser();
+  User userCredentials = User();
   StorageService storageService = locator<StorageService>();
   bool? _token;
+  bool hideDetails = false;
   String userType = "";
 
   //get the user object
-  getLocalUser({SaveUser? user}) async {
+  getLocalUser({User? user}) async {
+    print("GET LOCAL USER");
     print(userCredentials.email);
     if (user != null) {
       userCredentials = user;
     } else {
       String? userVal = await storageService.readItem(key: currentUser);
+      print(userVal);
       if(userVal == null || userVal == "null"){
-
+        await locator<Repository>().getUser();
       }else{
-        userCredentials = SaveUser.fromJson(jsonDecode(userVal));
+        userCredentials = User.fromJson(jsonDecode(userVal));
       }
     }
-    String? value = await storageService.readItem(key: accessToken);
-
-    _token = value != null ? true : false;
   }
 
-  storeUser(SaveUser? response) async {
+  storeUser(User? response) async {
     print("store user");
     if(response==null){
       storageService.deleteItem(key: currentUser);
@@ -58,7 +60,7 @@ class UserService {
   resetAllCredentials() {
     storageService.deleteItem(key: currentUser);
     storageService.deleteItem(key: token);
-    userCredentials = SaveUser();
+    userCredentials = User();
     _token = null;
   }
 }

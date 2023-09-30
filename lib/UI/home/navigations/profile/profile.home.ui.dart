@@ -48,7 +48,7 @@ class ProfileHomeScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                AppText("Hi, ${model.userService.userCredentials.name}", isBold: true, size: 20,),
+                                AppText("Hi, ${model.userService.userCredentials.firstName} ${model.userService.userCredentials.lastName}", isBold: true, size: 20,),
                                 AppText("${model.userService.userCredentials.email}",  size: 15, color: Colors.white.withOpacity(0.5),),
                                 10.0.sbH,
                                 Row(

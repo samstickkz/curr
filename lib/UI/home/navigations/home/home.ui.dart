@@ -20,254 +20,259 @@ class HomePage extends StatelessWidget {
       onModelReady: (m){
         m.context = context;
       },
-      builder: (_, model, child)=> Scaffold(
-        // appBar: ,
-        drawer: const Drawer(
-          child: DrawerScreen(),
-        ),
-        body: Column(
-          children: [
-            Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(32),
-                    bottomRight: Radius.circular(32),
+      builder: (_, model, child)=> RefreshIndicator(
+        onRefresh: ()async{
+          model.getUser();
+        },
+        child: Scaffold(
+          // appBar: ,
+          drawer: const Drawer(
+            child: DrawerScreen(),
+          ),
+          body: Column(
+            children: [
+              Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(32),
+                      bottomRight: Radius.circular(32),
+                  ),
+                  gradient: primaryGradient,
+                  // gradient: primaryGradient,
                 ),
-                gradient: primaryGradient,
-                // gradient: primaryGradient,
-              ),
-              child: Column(
-                children: [
-                  AppBar(
-                    backgroundColor: Colors.transparent,
-                    actions: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          AppText(
-                            'Welcome ${model.userService.userCredentials.name??""}',
-                          ),
-                          16.0.sbW,
-                        ],
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 5.0, left: 16, right: 16, bottom: 13),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        16.0.sbH,
+                child: Column(
+                  children: [
+                    AppBar(
+                      backgroundColor: Colors.transparent,
+                      actions: [
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            const AppText('Your Balance', size: 22,),
+                            AppText(
+                              'Welcome ${model.userService.userCredentials.firstName??""} ${model.userService.userCredentials.lastName??""}',
+                            ),
                             16.0.sbW,
-                            InkWell(
-                              onTap: model.setAsHidden,
-                              child: Icon(CupertinoIcons.eye)
-                            )
                           ],
-                        ),
-                        4.0.sbH,
-                        AppText('\$${model.userService.userCredentials.isHidden==true?"*******":"2600.50"}', size: 34, isBold: true,),
-                        16.0.sbH,
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            /// top up button
-                            // buy button
-                            HomeButtons(
-                              onTap: model.popBuyToken,
-                              icon: Icons.arrow_upward_outlined,
-                              title: 'Buy',
-                            ),
-                            HomeButtons(
-                              onTap: model.navigateToBalance,
-                              icon: Icons.add,
-                              title: 'Sell',
-                            ),
-                            HomeButtons(
-                              onTap:  () {},
-                              icon: Icons.minimize_rounded,
-                              title: 'Top Up',
-                            ),
-                          ],
-                        ),
-
-
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: ListView(
-                padding: 0.0.padA,
-                children: [
-                  16.0.sbH,
-                  Padding(
-                    padding: 16.0.padH,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const AppText("Transactions", isBold: true,),
-                        InkWell(
-                            onTap: (){},
-                            child: AppText("see all", isBold: true, color: primaryColor, size: 13,)
                         ),
                       ],
                     ),
-                  ),
-                  16.0.sbH,
-                  Container(
-                    height: 70,
-                    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
-                    padding: 16.0.padA,
-                    decoration: BoxDecoration(
-                        color: textFieldFillColor,
-                        borderRadius: BorderRadius.circular(12)
-                    ),
-                    child: Row(
-                      children: [
-                        Image.asset('images/Ethereum icon.png', height: 26, width: 26,),
-                        12.0.sbW,
-                        Expanded(
-                          child: Row(
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 5.0, left: 16, right: 16, bottom: 13),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          16.0.sbH,
+                          Row(
+                            children: [
+                              const AppText('Your Balance', size: 22,),
+                              16.0.sbW,
+                              InkWell(
+                                onTap: model.setAsHidden,
+                                child: Icon(CupertinoIcons.eye)
+                              )
+                            ],
+                          ),
+                          4.0.sbH,
+                          AppText('\$${model.userService.hideDetails?"*******":"2600.50"}', size: 34, isBold: true,),
+                          16.0.sbH,
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  AppText("Ethereum", family: 'Inter'),
-                                  AppText('ETH'.toUpperCase(), weight: FontWeight.w100, color: Theme.of(context).disabledColor, family: 'Inter'),
-                                ],
+                              /// top up button
+                              // buy button
+                              HomeButtons(
+                                onTap: model.popBuyToken,
+                                icon: Icons.arrow_upward_outlined,
+                                title: 'Buy',
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  AppText('+0.54%', family: 'Inter', weight: FontWeight.w500, size: 17,),
-                                ],
+                              HomeButtons(
+                                onTap: model.navigateToBalance,
+                                icon: Icons.add,
+                                title: 'Sell',
+                              ),
+                              HomeButtons(
+                                onTap:  () {},
+                                icon: Icons.minimize_rounded,
+                                title: 'Top Up',
                               ),
                             ],
                           ),
-                        )
-                      ],
+
+
+                        ],
+                      ),
                     ),
-                  ),
-                  16.0.sbH,
-                  Padding(
-                    padding: 16.0.padH,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const AppText("WatchList", isBold: true,),
-                        InkWell(
-                            onTap: (){},
-                            child: AppText("see more", isBold: true, color: primaryColor, size: 13,)
-                        ),
-                      ],
+                  ],
+                ),
+              ),
+              Expanded(
+                child: ListView(
+                  padding: 0.0.padA,
+                  children: [
+                    16.0.sbH,
+                    Padding(
+                      padding: 16.0.padH,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const AppText("Transactions", isBold: true,),
+                          InkWell(
+                              onTap: (){},
+                              child: AppText("see all", isBold: true, color: primaryColor, size: 13,)
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  10.0.sbH,
-                  // ListView.builder(
-                  //     shrinkWrap: true,
-                  //     physics: const NeverScrollableScrollPhysics(),
-                  //     itemCount: 10,
-                  //     itemBuilder: (_,i){
-                  //       Map<String, dynamic> coin = model.cryptoList[i];
-                  //       return Container(
-                  //         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
-                  //         padding: 16.0.padA,
-                  //         decoration: BoxDecoration(
-                  //             color: textFieldFillColor,
-                  //             borderRadius: BorderRadius.circular(12)
-                  //         ),
-                  //         child: Row(
-                  //           children: [
-                  //             Image.network(coin["image"], height: 26, width: 26,),
-                  //             12.0.sbW,
-                  //             Expanded(
-                  //               child: Row(
-                  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //                 children: [
-                  //                   Column(
-                  //                     crossAxisAlignment: CrossAxisAlignment.start,
-                  //                     children: [
-                  //                       AppText(coin["name"], family: 'Inter'),
-                  //                       AppText('${coin["symbol"]}'.toUpperCase(), weight: FontWeight.w100, color: Theme.of(context).disabledColor, family: 'Inter'),
-                  //                     ],
-                  //                   ),
-                  //                   Column(
-                  //                     crossAxisAlignment: CrossAxisAlignment.end,
-                  //                     children: [
-                  //                       AppText('\$${NumberFormat.decimalPattern().format(coin["current_price"])}', family: 'Inter', weight: FontWeight.w500, size: 17,),
-                  //                       AppText("${coin['price_change_percentage_24h'].toStringAsFixed(2)}%".toUpperCase(), color: primaryColor, family: 'Inter'),
-                  //                     ],
-                  //                   ),
-                  //                 ],
-                  //               ),
-                  //             )
-                  //           ],
-                  //         ),
-                  //       );
-                  //     }
-                  // )
-                  // StreamBuilder(
-                  //   stream: model.fetchCryptoPrice(),
-                  //   builder: (context, snapshot) {
-                  //     List<Map<String, dynamic>> coins = snapshot.data??[];
-                  //     return snapshot.data==null? coins.length ==0? AppText("No Data"): const ListLoader(height: 70,): ListView.builder(
-                  //       shrinkWrap: true,
-                  //       physics: const NeverScrollableScrollPhysics(),
-                  //       itemCount: 10,
-                  //       itemBuilder: (_,i){
-                  //         Map<String, dynamic> coin = coins[i];
-                  //         return Container(
-                  //           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
-                  //           padding: 16.0.padA,
-                  //           decoration: BoxDecoration(
-                  //               color: textFieldFillColor,
-                  //               borderRadius: BorderRadius.circular(12)
-                  //           ),
-                  //           child: Row(
-                  //             children: [
-                  //               Image.network(coin["image"], height: 26, width: 26,),
-                  //               12.0.sbW,
-                  //               Expanded(
-                  //                 child: Row(
-                  //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //                   children: [
-                  //                     Column(
-                  //                       crossAxisAlignment: CrossAxisAlignment.start,
-                  //                       children: [
-                  //                         AppText(coin["name"], family: 'Inter'),
-                  //                         AppText('${coin["symbol"]}'.toUpperCase(), weight: FontWeight.w100, color: AppColors.descriptionTextColor, family: 'Inter'),
-                  //                       ],
-                  //                     ),
-                  //                     Column(
-                  //                       crossAxisAlignment: CrossAxisAlignment.end,
-                  //                       children: [
-                  //                         AppText('\$${NumberFormat.decimalPattern().format(coin["current_price"])}', family: 'Inter', weight: FontWeight.w500, size: 17,),
-                  //                         AppText("${coin['price_change_percentage_24h'].toStringAsFixed(2)}%".toUpperCase(), color: primaryColor, family: 'Inter'),
-                  //                       ],
-                  //                     ),
-                  //                   ],
-                  //                 ),
-                  //               )
-                  //             ],
-                  //           ),
-                  //         );
-                  //       }
-                  //     );
-                  //   }
-                  // )
-                ],
-              )
-            ),
-          ],
+                    16.0.sbH,
+                    Container(
+                      height: 70,
+                      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
+                      padding: 16.0.padA,
+                      decoration: BoxDecoration(
+                          color: textFieldFillColor,
+                          borderRadius: BorderRadius.circular(12)
+                      ),
+                      child: Row(
+                        children: [
+                          Image.asset('images/Ethereum icon.png', height: 26, width: 26,),
+                          12.0.sbW,
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    AppText("Ethereum", family: 'Inter'),
+                                    AppText('ETH'.toUpperCase(), weight: FontWeight.w100, color: Theme.of(context).disabledColor, family: 'Inter'),
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    AppText('+0.54%', family: 'Inter', weight: FontWeight.w500, size: 17,),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    16.0.sbH,
+                    Padding(
+                      padding: 16.0.padH,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const AppText("WatchList", isBold: true,),
+                          InkWell(
+                              onTap: (){},
+                              child: AppText("see more", isBold: true, color: primaryColor, size: 13,)
+                          ),
+                        ],
+                      ),
+                    ),
+                    10.0.sbH,
+                    // ListView.builder(
+                    //     shrinkWrap: true,
+                    //     physics: const NeverScrollableScrollPhysics(),
+                    //     itemCount: 10,
+                    //     itemBuilder: (_,i){
+                    //       Map<String, dynamic> coin = model.cryptoList[i];
+                    //       return Container(
+                    //         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
+                    //         padding: 16.0.padA,
+                    //         decoration: BoxDecoration(
+                    //             color: textFieldFillColor,
+                    //             borderRadius: BorderRadius.circular(12)
+                    //         ),
+                    //         child: Row(
+                    //           children: [
+                    //             Image.network(coin["image"], height: 26, width: 26,),
+                    //             12.0.sbW,
+                    //             Expanded(
+                    //               child: Row(
+                    //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //                 children: [
+                    //                   Column(
+                    //                     crossAxisAlignment: CrossAxisAlignment.start,
+                    //                     children: [
+                    //                       AppText(coin["name"], family: 'Inter'),
+                    //                       AppText('${coin["symbol"]}'.toUpperCase(), weight: FontWeight.w100, color: Theme.of(context).disabledColor, family: 'Inter'),
+                    //                     ],
+                    //                   ),
+                    //                   Column(
+                    //                     crossAxisAlignment: CrossAxisAlignment.end,
+                    //                     children: [
+                    //                       AppText('\$${NumberFormat.decimalPattern().format(coin["current_price"])}', family: 'Inter', weight: FontWeight.w500, size: 17,),
+                    //                       AppText("${coin['price_change_percentage_24h'].toStringAsFixed(2)}%".toUpperCase(), color: primaryColor, family: 'Inter'),
+                    //                     ],
+                    //                   ),
+                    //                 ],
+                    //               ),
+                    //             )
+                    //           ],
+                    //         ),
+                    //       );
+                    //     }
+                    // )
+                    // StreamBuilder(
+                    //   stream: model.fetchCryptoPrice(),
+                    //   builder: (context, snapshot) {
+                    //     List<Map<String, dynamic>> coins = snapshot.data??[];
+                    //     return snapshot.data==null? coins.length ==0? AppText("No Data"): const ListLoader(height: 70,): ListView.builder(
+                    //       shrinkWrap: true,
+                    //       physics: const NeverScrollableScrollPhysics(),
+                    //       itemCount: 10,
+                    //       itemBuilder: (_,i){
+                    //         Map<String, dynamic> coin = coins[i];
+                    //         return Container(
+                    //           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
+                    //           padding: 16.0.padA,
+                    //           decoration: BoxDecoration(
+                    //               color: textFieldFillColor,
+                    //               borderRadius: BorderRadius.circular(12)
+                    //           ),
+                    //           child: Row(
+                    //             children: [
+                    //               Image.network(coin["image"], height: 26, width: 26,),
+                    //               12.0.sbW,
+                    //               Expanded(
+                    //                 child: Row(
+                    //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //                   children: [
+                    //                     Column(
+                    //                       crossAxisAlignment: CrossAxisAlignment.start,
+                    //                       children: [
+                    //                         AppText(coin["name"], family: 'Inter'),
+                    //                         AppText('${coin["symbol"]}'.toUpperCase(), weight: FontWeight.w100, color: AppColors.descriptionTextColor, family: 'Inter'),
+                    //                       ],
+                    //                     ),
+                    //                     Column(
+                    //                       crossAxisAlignment: CrossAxisAlignment.end,
+                    //                       children: [
+                    //                         AppText('\$${NumberFormat.decimalPattern().format(coin["current_price"])}', family: 'Inter', weight: FontWeight.w500, size: 17,),
+                    //                         AppText("${coin['price_change_percentage_24h'].toStringAsFixed(2)}%".toUpperCase(), color: primaryColor, family: 'Inter'),
+                    //                       ],
+                    //                     ),
+                    //                   ],
+                    //                 ),
+                    //               )
+                    //             ],
+                    //           ),
+                    //         );
+                    //       }
+                    //     );
+                    //   }
+                    // )
+                  ],
+                )
+              ),
+            ],
+          ),
         ),
       ),
     );

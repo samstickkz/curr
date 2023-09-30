@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import '../../../constants/constants.dart';
 import '../../../locator.dart';
 import 'storage-service.dart';
@@ -34,6 +36,9 @@ class Initializer {
 
   checkForCachedUserData() async {
     String? value = await storageService.readItem(key: accessToken);
+    String? change = await storageService.readItem(key: "CHANGE_VISIBILITY");
+    var data = change!=null? jsonDecode(change):{"value": false};
+    locator<UserService>().hideDetails = data["value"];
     if (value != null && value.isNotEmpty) {
       isLoggedIn = true;
       await locator<UserService>().getLocalUser();

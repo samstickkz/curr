@@ -7,23 +7,38 @@ String resModelDataToString(dynamic data) => json.encode(data);
 dynamic resModelDataToJson(String data) => json.decode(data);
 
 class ResModel {
-  // dynamic? data;
-  bool? successful;
-  String? message;
+  List<String>? messages;
+  String? source;
+  String? exception;
+  String? errorId;
+  String? supportMessage;
+  int? statusCode;
 
-  ResModel({this.successful, this.message});
+  ResModel(
+      {this.messages,
+        this.source,
+        this.exception,
+        this.errorId,
+        this.supportMessage,
+        this.statusCode});
 
   ResModel.fromJson(Map<String, dynamic> json) {
-    // data = json['data'];
-    successful = json['successful'];
-    message = json['message'];
+    messages = json['messages'].cast<String>();
+    source = json['source'];
+    exception = json['exception'];
+    errorId = json['errorId'];
+    supportMessage = json['supportMessage'];
+    statusCode = json['statusCode'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    // data['data'] = this.data;
-    data['successful'] = this.successful;
-    data['message'] = this.message;
+    data['messages'] = this.messages;
+    data['source'] = this.source;
+    data['exception'] = this.exception;
+    data['errorId'] = this.errorId;
+    data['supportMessage'] = this.supportMessage;
+    data['statusCode'] = this.statusCode;
     return data;
   }
 }

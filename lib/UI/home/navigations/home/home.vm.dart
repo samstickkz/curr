@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import '../../../../core/models/user.dart';
 import '../../../../locator.dart';
 import '../../../../routes/routes.dart';
 import '../../../base.vm.dart';
@@ -16,23 +19,29 @@ class HomePageViewModel extends BaseViewModel{
 
 
   setAsHidden() async {
-    bool changedValue = userService.userCredentials.isHidden==null?false:userService.userCredentials.isHidden==true?false:true;
-    startLoader();
-    // try{
-    //   var response = await authApi.updateUser(isHidden: changedValue);
-    //   if(response){
-    //     await authApi.getUser();
-    //     initializer.init();
-    //   }
-    //   stopLoader();
-    //   notifyListeners();
-    // }catch(err){
-    //   stopLoader();
-    //   notifyListeners();
-    // }
-
-    // initializer.init();
+    bool changedValue = userService.hideDetails;
+    var data = {"value": !changedValue};
+    storageService.storeItem(key: "CHANGE_VISIBILITY", value:  jsonEncode(data));
+    userService.hideDetails = !changedValue;
+    await initializer.init();
     notifyListeners();
+
+  }
+
+  Future<User?> getUser()async{
+    startLoader();
+    try{
+      var response = await repository.getUser();
+      await initializer.init();
+
+      stopLoader();
+      notifyListeners();
+      return response;
+    }catch(err){
+      stopLoader();
+      notifyListeners();
+      return null;
+    }
   }
 
   // Stream<List<Map<String, dynamic>>?> fetchCryptoPrice() async*{
