@@ -47,7 +47,10 @@ connect() {
         print("status message: ${e.error}");
         print(e.response?.statusCode);
         print("${e.response?.data.toString()}");
-        showCustomToast(formatErrorMessageList(convertDynamicListToStringList(jsonDecode(e.response!.data)['messages'])));
+        List error = jsonDecode(e.response!.data)['messages'];
+        String errorMessage = error.isEmpty? jsonDecode(e.response!.data)['exception']: formatErrorMessageList(convertDynamicListToStringList(jsonDecode(e.response!.data)['messages']));
+        print("ERRORMESSAGE::: $errorMessage");
+        showCustomToast(errorMessage);
         try {
           if ((e.response?.statusCode == 401 &&
               jsonDecode(e.response!.data)['messages'] != null &&
