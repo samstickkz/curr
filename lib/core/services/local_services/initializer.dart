@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import '../../../constants/constants.dart';
 import '../../../locator.dart';
+import '../../models/user.dart';
 import 'storage-service.dart';
 import 'user.service.dart';
 
@@ -41,7 +42,12 @@ class Initializer {
     locator<UserService>().hideDetails = data["value"];
     if (value != null && value.isNotEmpty) {
       isLoggedIn = true;
-      await locator<UserService>().getLocalUser();
+      String? userVal = await storageService.readItem(key: currentUser);
+      if(userVal==null){
+        await locator<UserService>().getLocalUser();
+      }else{
+        await locator<UserService>().getLocalUser(user: User.fromJson(jsonDecode(userVal)));
+      }
     }else{
       isLoggedIn = false;
     }

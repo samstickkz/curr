@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Color primaryDarkColor = const Color.fromRGBO(4, 6, 52, 1);
+Color primaryDarkColor = const Color(0xFF20205D);
 Color primaryLight = const Color(0xFF2072B6);
 Color light = const Color(0xFF2072B6);
 Color limeLight = const Color(0xFFEAF4AB);
@@ -41,7 +41,6 @@ const LinearGradient primaryGradient = LinearGradient(
 );
 
 final Color primaryColor = primaryGradient.colors[0]; // Extract the first color
-
 
 // class AppColors {
 //   static const main = Color(0xFF0064E5);

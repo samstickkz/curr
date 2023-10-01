@@ -18,13 +18,11 @@ class UserService {
 
   //get the user object
   getLocalUser({User? user}) async {
-    print("GET LOCAL USER");
-    print(userCredentials.email);
-    if (user != null) {
-      userCredentials = user;
+    User? checkUser = user??userCredentials;
+    if (checkUser.email != null) {
+      userCredentials = checkUser;
     } else {
       String? userVal = await storageService.readItem(key: currentUser);
-      print(userVal);
       if(userVal == null || userVal == "null"){
         await locator<Repository>().getUser();
       }else{
@@ -59,7 +57,7 @@ class UserService {
   //clear all user credentials
   resetAllCredentials() {
     storageService.deleteItem(key: currentUser);
-    storageService.deleteItem(key: token);
+    storageService.deleteItem(key: accessToken);
     userCredentials = User();
     _token = null;
   }

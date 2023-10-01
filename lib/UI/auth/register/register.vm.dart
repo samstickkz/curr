@@ -58,7 +58,6 @@ class RegisterViewModel extends BaseViewModel {
         if (res.isRight()) {
           String response = res.asRight();
           navigationService.goBack();
-          showCustomToast(response, success: true);
           stopLoader();
           notifyListeners();
         } else {
@@ -67,7 +66,6 @@ class RegisterViewModel extends BaseViewModel {
           stopLoader();
         }
       }catch(err){
-        showCustomToast("$err");
         stopLoader();
         notifyListeners();
       }

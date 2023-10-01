@@ -16,7 +16,7 @@ Widget toast(String message, {bool? success}) {
           width: double.infinity,
           // height: 40.0,
           color:
-          !success! ? Colors.red : primaryColor,
+          !success! ? Colors.red : primaryDarkColor,
           child: Row(
             children: [
               if (!success) const Icon(Icons.error_outline, color: Colors.white,
@@ -26,7 +26,7 @@ Widget toast(String message, {bool? success}) {
                 child: Text(
                   message,
                   style: TextStyle(
-                    color: !success ? Colors.white : Colors.black,
+                    color: !success ? Colors.white : Colors.white,
                     fontSize: 13.0,
                   ),
                 ),

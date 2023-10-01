@@ -5,7 +5,7 @@ import '../core/services/local_services/navigation_services.dart';
 import '../core/services/local_services/user.service.dart';
 import '../locator.dart';
 
-const String token = 'token';
+
 const String userTypes = 'userTypes';
 const String userTypeData = 'userTypeData';
 const String accessToken = 'accessToken';

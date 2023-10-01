@@ -36,7 +36,7 @@ connect() {
         if (value != null && value.isNotEmpty) {
           options.headers['Authorization'] = "Bearer " + value;
         }
-        options.uri.path=="/api/tokens" || options.uri.path=="/api/users/self-register"? options.headers["tenant"] = "root":null;
+        options.uri.path=="/api/tokens" || options.uri.path=="/api/users/self-register" || options.uri.path=="api/users/forgot-password"? options.headers["tenant"] = "root":null;
         return handler.next(options);
       },
       onResponse: (response, handler) async {
