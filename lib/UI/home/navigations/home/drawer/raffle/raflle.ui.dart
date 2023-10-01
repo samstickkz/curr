@@ -74,15 +74,15 @@ class _SpinWheelState extends State<SpinWheel> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Column(
+            const Column(
               children: [
                 Padding(
-                  padding:const EdgeInsets.all(8.0),
+                  padding:EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children:[
                       Row(
-                        children: const [
+                        children: [
                           Text(
                             'Total balance: ',
                             style: TextStyle(
@@ -97,7 +97,7 @@ class _SpinWheelState extends State<SpinWheel> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Text(
                       'Total Wins: ',
                       style: TextStyle(
@@ -109,7 +109,7 @@ class _SpinWheelState extends State<SpinWheel> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children:const [
+                  children:[
                     Text(
                       'Total Cash Out: ',
                       style: TextStyle(

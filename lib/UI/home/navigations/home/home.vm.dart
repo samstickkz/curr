@@ -57,7 +57,7 @@ class HomePageViewModel extends BaseViewModel{
   }
 
 
-  popBuyToken(){
+  popBuyToken(BuildContext context){
     showBottomSheet(
       context: context,
       builder: (_) {

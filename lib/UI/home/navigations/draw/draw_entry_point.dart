@@ -45,7 +45,7 @@ class _DrawEntryPointScreenState extends State<DrawEntryPointScreen> with Single
       },
       builder: (_, model, child)=> Scaffold(
         appBar: AppBar(
-          title: AppText("Raffle Draw", isBold: true, size: 18,),
+          title: const AppText("Raffle Draw", isBold: true, size: 18,),
         ),
         body: SafeArea(
           child: Stack(
@@ -76,7 +76,7 @@ class _DrawEntryPointScreenState extends State<DrawEntryPointScreen> with Single
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AppText("Welcome to *Jackpot", isBold: true, size: 22, color: primaryColor, family: 'Space-Grotesk',),
-                        AppText("Stand a chance of winning \$100,000by staking \$1 only",  size: 18,),
+                        const AppText("Stand a chance of winning \$100,000by staking \$1 only",  size: 18,),
                       ],
                     ),
                     Column(

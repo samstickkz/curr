@@ -5,7 +5,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:oktoast/oktoast.dart';
-
 import 'core/services/local_services/initializer.dart';
 import 'core/services/local_services/navigation_services.dart';
 import 'locator.dart';
