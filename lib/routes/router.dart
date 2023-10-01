@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../UI/auth/forget_password/forget.password.ui.dart';
+import '../UI/auth/forget_password/reset_password/reset.password.ui.dart';
 import '../UI/auth/login/login.ui.dart';
 import '../UI/auth/register/register.ui.dart';
 import '../UI/home/bottom_navigation.ui.dart';
@@ -25,10 +27,12 @@ class Routers {
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case loginRoute:
         return MaterialPageRoute(builder: (_) => const LoginPage());
-    //   case resetPasswordRoute:
-    //     return MaterialPageRoute(builder: (_) => const ResetPassword());
+      case resetPasswordRoute:
+        return MaterialPageRoute(builder: (_) => ResetPasswordScreen(email: cache.email,));
       case registerRoute:
         return MaterialPageRoute(builder: (_) => const RegisterPage());
+      case forgotPasswordRoute:
+        return MaterialPageRoute(builder: (_) => const ForgotPasswordScreen());
       case bottomNavigationRoute:
         return MaterialPageRoute(builder: (_) => const BottomNavigationScreen());
       case buyBal:

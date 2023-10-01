@@ -21,10 +21,8 @@ class LoginViewModel extends BaseViewModel{
     }
   }
 
-  // fixes made
-
   resetPassword(){
-    navigationService.navigateTo(resetPasswordRoute);
+    navigationService.navigateTo(forgotPasswordRoute);
   }
 
   register(){
@@ -58,18 +56,20 @@ class LoginViewModel extends BaseViewModel{
       );
       if (res.isRight()) {
         LoginResponse response = res.asRight();
+        storageService.storeItem(key: accessToken, value: response.token);
+        storageService.storeItem(key: refreshToken, value: response.refreshToken);
+        storageService.storeItem(key: expiryDate, value: response.refreshTokenExpiryTime);
+        print(await storageService.readItem(key: accessToken));
         await getUser();
         stopLoader();
         notifyListeners();
         return null;
       } else {
         ResModel response = res.asLeft();
-        showCustomToast(response.messages.toString());
         notifyListeners();
         stopLoader();
         return null;
       }
-      notifyListeners();
     } catch (e) {
       notifyListeners();
       stopLoader();

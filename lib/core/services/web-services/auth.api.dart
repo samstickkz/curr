@@ -30,10 +30,9 @@ class AuthenticationApiService {
         "email": email,
         "password": password,
       });
-      print("Here");
+
       return Right(LoginResponse.fromJson(jsonDecode(response.data)));
     } on DioError catch (e) {
-      print("Now Here");
       return Left(resModelFromJson(e.response?.data));
     } catch (e) {
       print("Definately Here");
@@ -65,24 +64,109 @@ class AuthenticationApiService {
     required String confirmPassword,
   }) async {
     try {
-      Response response = await connect().post("users/self-register", data: {
-        "email": email,
-        "password": password,
-        "confirmPassword": confirmPassword,
-        "userName": userName,
-        "firstName": firstName,
-        "lastName": lastName,
-        "phoneNumber": phoneNumber,
-      });
+      Dio dio = Dio();
+      var response = await dio.post("${NetworkConfig.BASE_URL}users/self-register",
+          data: {
+            "email": email,
+            "password": password,
+            "confirmPassword": confirmPassword,
+            "userName": userName,
+            "firstName": firstName,
+            "lastName": lastName,
+            "phoneNumber": phoneNumber,
+          },
+          options: Options(followRedirects: true, headers: {
+            "Accept": "application/json",
+            "tenant": "root"
+          }));
 
-      if(response.statusCode==200){
-        return Right("Successful");
+      if(response.statusCode==200|| response.statusCode==201){
+        print(response.data);
+        showCustomToast(response.data.toString(), success: true);
+        return Right(response.data.toString());
       }else{
-        showCustomToast(response.data["messages"][0]);
+        List error = jsonDecode(response.data)['messages'];
+        String errorMessage = error.isEmpty? jsonDecode(response.data)['exception']: formatErrorMessageList(convertDynamicListToStringList(jsonDecode(response.data)['messages']));
+        showCustomToast(errorMessage);
         return Left(resModelFromJson(response.data));
       }
-    } catch (e) {
-      return Left(ResModel(messages: [e.toString()]));
+    } on DioError catch (err) {
+      List error = jsonDecode(err.response.toString())['messages'];
+      String errorMessage = error.isEmpty? jsonDecode(err.response.toString())['exception']: formatErrorMessageList(convertDynamicListToStringList(error));
+
+      showCustomToast(errorMessage);
+      return Left(ResModel.fromJson(jsonDecode(jsonEncode(err.response))));
+      rethrow;
+    }
+  }
+
+  Future<Either<ResModel, String>> forgetPassword({
+    required String email
+  }) async {
+    try {
+      Dio dio = Dio();
+      var response = await dio.post("${NetworkConfig.BASE_URL}users/forgot-password",
+          data: {
+            "email": email
+          },
+          options: Options(followRedirects: true, headers: {
+            "Accept": "application/json",
+            "tenant": "root"
+          }));
+
+      if(response.statusCode==200|| response.statusCode==201){
+        print(response.data);
+        showCustomToast(response.data.toString(), success: true);
+        return Right(response.data.toString());
+      }else{
+        List error = jsonDecode(response.data)['messages'];
+        String errorMessage = error.isEmpty? jsonDecode(response.data)['exception']: formatErrorMessageList(convertDynamicListToStringList(jsonDecode(response.data)['messages']));
+        showCustomToast(errorMessage);
+        return Left(resModelFromJson(response.data));
+      }
+    } on DioError catch (err) {
+      List error = jsonDecode(err.response.toString())['messages'];
+      String errorMessage = error.isEmpty? jsonDecode(err.response.toString())['exception']: formatErrorMessageList(convertDynamicListToStringList(error));
+
+      showCustomToast(errorMessage);
+      return Left(ResModel.fromJson(jsonDecode(jsonEncode(err.response))));
+    }
+  }
+
+  Future<Either<ResModel, String>> resetPassword({
+    required String email,
+    required String password,
+    required String token
+  }) async {
+    try {
+      Dio dio = Dio();
+      var response = await dio.post("${NetworkConfig.BASE_URL}users/reset-password",
+          data: {
+            "email": email,
+            "password": password,
+            "token": token
+          },
+          options: Options(followRedirects: true, headers: {
+            "Accept": "application/json",
+            "tenant": "root"
+          }));
+
+      if(response.statusCode==200|| response.statusCode==201){
+        print(response.data);
+        showCustomToast("Password reset successfully", success: true);
+        return Right(response.data.toString());
+      }else{
+        List error = jsonDecode(response.data)['messages'];
+        String errorMessage = error.isEmpty? jsonDecode(response.data)['exception']: formatErrorMessageList(convertDynamicListToStringList(jsonDecode(response.data)['messages']));
+        showCustomToast(errorMessage);
+        return Left(resModelFromJson(response.data));
+      }
+    } on DioError catch (err) {
+      List error = jsonDecode(err.response.toString())['messages'];
+      String errorMessage = error.isEmpty? jsonDecode(err.response.toString())['exception']: formatErrorMessageList(convertDynamicListToStringList(error));
+
+      showCustomToast(errorMessage);
+      return Left(ResModel.fromJson(jsonDecode(jsonEncode(err.response))));
     }
   }
 

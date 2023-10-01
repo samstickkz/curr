@@ -24,13 +24,23 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen>  with S
 
       },
       builder: (_, model, child) {
-        return Stack(
+        return Theme.of(context).platform==TargetPlatform.android? Scaffold(
+            body: model.pages[model.currentIndex],
+            bottomNavigationBar: _BottomNavigationBar(
+              onItemSelected: model.changePage,
+            ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: model.navigateToDraw,
+            backgroundColor: primaryColor,
+            child: SvgPicture.asset(AppImages.stars, height: 24, width: 24, color: Colors.black, fit: BoxFit.cover,),
+          ),
+        ): Stack(
           children: [
             Scaffold(
-                body: model.pages[model.currentIndex],
-                bottomNavigationBar: _BottomNavigationBar(
-                  onItemSelected: model.changePage,
-                ),
+              body: model.pages[model.currentIndex],
+              bottomNavigationBar: _BottomNavigationBar(
+                onItemSelected: model.changePage,
+              ),
             ),
             Align(
                 alignment: Alignment.bottomCenter,

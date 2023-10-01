@@ -36,7 +36,7 @@ connect() {
         if (value != null && value.isNotEmpty) {
           options.headers['Authorization'] = "Bearer " + value;
         }
-        options.uri.path=="/api/tokens" || options.uri.path=="/api/users/self-register"? options.headers["tenant"] = "root":null;
+        options.uri.path=="/api/tokens" || options.uri.path=="/api/users/self-register" || options.uri.path=="api/users/forgot-password"? options.headers["tenant"] = "root":null;
         return handler.next(options);
       },
       onResponse: (response, handler) async {
@@ -47,7 +47,10 @@ connect() {
         print("status message: ${e.error}");
         print(e.response?.statusCode);
         print("${e.response?.data.toString()}");
-        showCustomToast(formatErrorMessageList(convertDynamicListToStringList(jsonDecode(e.response!.data)['messages'])));
+        List error = jsonDecode(e.response!.data)['messages'];
+        String errorMessage = error.isEmpty? jsonDecode(e.response!.data)['exception']: formatErrorMessageList(convertDynamicListToStringList(jsonDecode(e.response!.data)['messages']));
+        print("ERRORMESSAGE::: $errorMessage");
+        showCustomToast(errorMessage);
         try {
           if ((e.response?.statusCode == 401 &&
               jsonDecode(e.response!.data)['messages'] != null &&

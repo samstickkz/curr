@@ -1,5 +1,7 @@
 import 'package:get_it/get_it.dart';
 
+import 'UI/auth/forget_password/forget.password.vm.dart';
+import 'UI/auth/forget_password/reset_password/reset.password.vm.dart';
 import 'UI/auth/login/login.vm.dart';
 import 'UI/auth/register/register.vm.dart';
 import 'UI/base.vm.dart';
@@ -52,7 +54,8 @@ void registerViewModels() {
   locator.registerFactory<BuyTokenViewModel>(() => BuyTokenViewModel());
   locator.registerFactory<DrawerViewModel>(() => DrawerViewModel());
   locator.registerFactory<ProfileHomeViewModel>(() => ProfileHomeViewModel());
-  // locator.registerFactory<CreatePinViewModel>(() => CreatePinViewModel());
+  locator.registerFactory<ForgetPasswordViewModel>(() => ForgetPasswordViewModel());
+  locator.registerFactory<ResetPasswordViewModel>(() => ResetPasswordViewModel());
   // locator.registerFactory<FinishPinViewModel>(() => FinishPinViewModel());
   // locator.registerFactory<CheckPinViewModel>(() => CheckPinViewModel());
   locator.registerFactory<DrawEntryPointViewModel>(() => DrawEntryPointViewModel());

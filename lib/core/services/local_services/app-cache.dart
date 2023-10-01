@@ -18,6 +18,7 @@ class AppCache {
   File? userImage;
 
   String? rentCost;
+  String? email;
   String? contractType;
 
 }

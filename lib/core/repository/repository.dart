@@ -32,6 +32,18 @@ class Repository {
     return await authApi.register(email: email, password: password, firstName: firstName, lastName: lastName, userName: userName, phoneNumber: phoneNumber, confirmPassword: confirmPassword);
   }
 
+  Future<Either<ResModel, String>> forgetPassword({required String email}) async {
+    return await authApi.forgetPassword(email: email);
+  }
+
+  Future<Either<ResModel, String>> resetPassword({
+    required String email,
+    required String password,
+    required String token
+  }) async {
+    return await authApi.resetPassword(email: email, password: password, token: token);
+  }
+
   Future<Either<ResModel, LoginResponse>> login({required String email, required String password
   }) async {
     Either<ResModel, LoginResponse> response = await authApi.login(email: email, password: password);
