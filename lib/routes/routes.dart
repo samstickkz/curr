@@ -9,3 +9,4 @@ const String createPinRouteOne = '/create_pin_route_one_route';
 const String loginWithPinRoute = '/login_with_pin_route_one_route';
 const String drawEntryPointRoute = '/draw_entry_with_route';
 const String buyBal = '/buy_with_route';
+const String forgotPasswordRoute = '/forgot_password_route';

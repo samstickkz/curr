@@ -21,10 +21,8 @@ class LoginViewModel extends BaseViewModel{
     }
   }
 
-  // fixes made
-
   resetPassword(){
-    navigationService.navigateTo(resetPasswordRoute);
+    navigationService.navigateTo(forgotPasswordRoute);
   }
 
   register(){
@@ -72,7 +70,6 @@ class LoginViewModel extends BaseViewModel{
         stopLoader();
         return null;
       }
-      notifyListeners();
     } catch (e) {
       notifyListeners();
       stopLoader();
