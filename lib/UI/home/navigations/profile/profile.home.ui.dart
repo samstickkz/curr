@@ -19,7 +19,7 @@ class ProfileHomeScreen extends StatelessWidget {
       },
       builder: (_, model, child)=> Scaffold(
         appBar: AppBar(
-          title: Text("Profile"),
+          title: const Text("Profile"),
           centerTitle: true,
         ),
         body: Padding(
@@ -57,10 +57,10 @@ class ProfileHomeScreen extends StatelessWidget {
                                       backgroundColor: Colors.greenAccent.withOpacity(0.2),
                                       radius: 30,
                                       expandable: true,
-                                      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                                      child: AppText("KYC Verified", color: Colors.lightGreenAccent,),
+                                      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                                      child: const AppText("KYC Verified", color: Colors.lightGreenAccent,),
                                     ),
-                                    Expanded(child: SizedBox())
+                                    const Expanded(child: SizedBox())
                                   ],
                                 )
                               ],
@@ -150,7 +150,7 @@ class ProfileCard extends StatelessWidget {
               16.0.sbW,
               Expanded(child: AppText(title, size: 17, weight: FontWeight.w700, maxLine: 1, overflow: TextOverflow.ellipsis, color: isLogout==true? Colors.red:null,)),
               16.0.sbW,
-              child ?? Icon(Icons.arrow_forward_ios, size: 16,)
+              child ?? const Icon(Icons.arrow_forward_ios, size: 16,)
             ],
           ),
         ),

@@ -31,6 +31,7 @@ class BottomNavigationViewModel extends BaseViewModel{
     ProfileHomeScreen()
   ];
 
+
   void refreshAllInfo() async {
     await initializer.init();
     refresh();

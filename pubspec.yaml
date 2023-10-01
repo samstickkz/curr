@@ -89,7 +89,7 @@ flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
-  uses-material-design: true
+  #  uses-material-design: true P@$$w0rd
 
   # To add assets to your application, add an assets section, like this:
   assets:
@@ -114,13 +114,13 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Space-Grotesk
-      fonts:
-        - asset: assets/font/SpaceGrotesk-Regular.ttf
-        - asset: assets/font/SpaceGrotesk-SemiBold.ttf
-          weight: 700
-        - asset: assets/font/SpaceGrotesk-Bold.ttf
-          weight: 900
+      - family: Space-Grotesk
+        fonts:
+          - asset: assets/font/SpaceGrotesk-Regular.ttf
+          - asset: assets/font/SpaceGrotesk-SemiBold.ttf
+            weight: 700
+          - asset: assets/font/SpaceGrotesk-Bold.ttf
+            weight: 900
   # fonts:
   #   - family: Schyler
   #     fonts:
