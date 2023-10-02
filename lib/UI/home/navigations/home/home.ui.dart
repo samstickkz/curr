@@ -134,7 +134,9 @@ class HomePage extends StatelessWidget {
                           color: textFieldFillColor,
                           borderRadius: BorderRadius.circular(12)
                       ),
-                      child: Row(
+                      child:
+
+                      Row(
                         children: [
                           Image.asset('images/Ethereum icon.png', height: 26, width: 26,),
                           12.0.sbW,
@@ -176,6 +178,157 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     10.0.sbH,
+
+
+                    Container(
+                      height: 70,
+                      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
+                      padding: 16.0.padA,
+                      decoration: BoxDecoration(
+                          color: textFieldFillColor,
+                          borderRadius: BorderRadius.circular(12)
+                      ),
+                      child:
+
+                      Row(
+                        children: [
+                          Image.asset('images/Ethereum icon.png', height: 26, width: 26,),
+                          12.0.sbW,
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    AppText("Ethereum", family: 'Inter'),
+                                    AppText('ETH'.toUpperCase(), weight: FontWeight.w100, color: Theme.of(context).disabledColor, family: 'Inter'),
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    AppText('+0.54%', family: 'Inter', weight: FontWeight.w500, size: 17,),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),Container(
+                      height: 70,
+                      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
+                      padding: 16.0.padA,
+                      decoration: BoxDecoration(
+                          color: textFieldFillColor,
+                          borderRadius: BorderRadius.circular(12)
+                      ),
+                      child:
+
+                      Row(
+                        children: [
+                          Image.asset('images/Ethereum icon.png', height: 26, width: 26,),
+                          12.0.sbW,
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    AppText("Ethereum", family: 'Inter'),
+                                    AppText('ETH'.toUpperCase(), weight: FontWeight.w100, color: Theme.of(context).disabledColor, family: 'Inter'),
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    AppText('+0.54%', family: 'Inter', weight: FontWeight.w500, size: 17,),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),Container(
+                      height: 70,
+                      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
+                      padding: 16.0.padA,
+                      decoration: BoxDecoration(
+                          color: textFieldFillColor,
+                          borderRadius: BorderRadius.circular(12)
+                      ),
+                      child:
+
+                      Row(
+                        children: [
+                          Image.asset('images/Ethereum icon.png', height: 26, width: 26,),
+                          12.0.sbW,
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    AppText("Ethereum", family: 'Inter'),
+                                    AppText('ETH'.toUpperCase(), weight: FontWeight.w100, color: Theme.of(context).disabledColor, family: 'Inter'),
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    AppText('+0.54%', family: 'Inter', weight: FontWeight.w500, size: 17,),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),Container(
+                      height: 70,
+                      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
+                      padding: 16.0.padA,
+                      decoration: BoxDecoration(
+                          color: textFieldFillColor,
+                          borderRadius: BorderRadius.circular(12)
+                      ),
+                      child:
+
+                      Row(
+                        children: [
+                          Image.asset('images/Ethereum icon.png', height: 26, width: 26,),
+                          12.0.sbW,
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    AppText("Ethereum", family: 'Inter'),
+                                    AppText('ETH'.toUpperCase(), weight: FontWeight.w100, color: Theme.of(context).disabledColor, family: 'Inter'),
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    AppText('+0.54%', family: 'Inter', weight: FontWeight.w500, size: 17,),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+
+
+
+
                     // ListView.builder(
                     //     shrinkWrap: true,
                     //     physics: const NeverScrollableScrollPhysics(),
@@ -219,6 +372,8 @@ class HomePage extends StatelessWidget {
                     //       );
                     //     }
                     // )
+
+
                     // StreamBuilder(
                     //   stream: model.fetchCryptoPrice(),
                     //   builder: (context, snapshot) {

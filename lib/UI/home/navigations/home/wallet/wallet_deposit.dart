@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-
 import '../../../../../constants/reuseables.dart';
 import '../../../../../core/models/model.dart';
 
@@ -51,12 +50,9 @@ class _WalletDepositState extends State<WalletDeposit> {
             false; // Set isLoading to false in both success and error cases
       });
     }
-
-
   }
 
-
-  void _showDepModal(BuildContext context){
+  void _showDepModal(BuildContext context) {
     showModalBottomSheet(
       context: context,
       builder: (context) => Container(
@@ -85,16 +81,16 @@ class _WalletDepositState extends State<WalletDeposit> {
                 height: 100.0,
                 child: isLoading
                     ? const Text(
-                  'loading....',
-                  style: TextStyle(color: AppStyle.textColorWhite),
-                )
+                        'loading....',
+                        style: TextStyle(color: AppStyle.textColorWhite),
+                      )
                     : Text(
-                  walletAddress,
-                  style: TextStyle(
-                    color: HexColor('E4E4F0'),
-                    fontSize: 15,
-                  ),
-                ),
+                        walletAddress,
+                        style: TextStyle(
+                          color: HexColor('E4E4F0'),
+                          fontSize: 15,
+                        ),
+                      ),
               ),
             ),
             const SizedBox(
@@ -144,124 +140,276 @@ class _WalletDepositState extends State<WalletDeposit> {
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-          child: Column(
+            child: Padding(
+      padding: const EdgeInsets.only(top: 20.0),
+      child: Column(
+        children: [
+          const Row(
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Center(
-                  child: Text(
-                'Wallet',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
-              )),
-              const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Container(
-                        height: 100,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: HexColor('232336'),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Image.asset(
-                                'images/Ethereum icon.png',
-                                height: 32,
-                                width: 32,
-                              ),
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Ethereum',
-                                    style: TextStyle(
-                                      color: HexColor('E4E4F0'),
-                                      fontSize: 17,
-                                    ),
-                                  ),
+              // add image
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: Container(
+              //     height: 50,
+              //     width: 50,
+              //     decoration: BoxDecoration(
+              //       borderRadius: BorderRadius.circular(50),
+              //       color: HexColor('232336'),
+              //     ),
+              //     child: Padding(
+              //       padding: const EdgeInsets.all(12.0),
+              //       child: Image.asset(
+              //         'assets/image/grow.png',
+              //         height: 32,
+              //         width: 32,
+              //       ),
+              //     ),
+              //   ),
+              // ),
 
-                                  //button
-                                  ElevatedButton(
-                                    onPressed: () async {
-                                      setState(() {
-                                        isLoading = true;
-                                      });
-                                      await fetchWalletAddress(context);
-                                      _showDepModal(context);
-                                      //show modal bottom sheet
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: HexColor('4A4A58'),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                    ),
-                                    child: Text(
-                                      'Deposit',
-                                      style: TextStyle(
-                                        color: HexColor('E4E4F0'),
-                                        fontSize: 17,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                width: 100,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Balance: \$2000',
-                                    style: TextStyle(
-                                      color: HexColor('E4E4F0'),
-                                    ),
-                                  ),
-                                  //withdraw button
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      // Get.to(() => CoinPage());
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: HexColor('4A4A58'),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                    ),
-                                    child: Text(
-                                      'Withdraw',
-                                      style: TextStyle(
-                                        color: HexColor('E4E4F0'),
-                                        fontSize: 17,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        )),
-                  ],
-                ),
-              ),
+              //Welcome message
+              Text('Welcome Samuel',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold)),
             ],
           ),
-        ));
+
+          const SizedBox(height: 20),
+          Text('Account Balance',
+              style: TextStyle(
+                color: Colors.white.withOpacity(0.5),
+                fontSize: 15,
+              )),
+          const SizedBox(height: 30),
+          const Text('\$25,000',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold)),
+
+          //deposit, withdraw and
+
+          const SizedBox(
+            height: 25,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                children: [
+                  Container(
+                    height: 50,
+                    width: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: Colors.deepPurpleAccent,
+                    ),
+                    child: Center(
+                      child: Image.asset(
+                        'assets/image/Download.png',
+                        height: 15, // Adjusted height to match the container
+                        width: 17, // Adjusted width to match the container
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    'Withdraw',
+                    style: TextStyle(color: Colors.white.withOpacity(0.5)),
+                  )
+                ],
+              ),
+              const SizedBox(
+                width: 40,
+              ),
+              Column(
+                children: [
+                  Container(
+                    height: 50,
+                    width: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: Colors.deepPurpleAccent,
+                    ),
+                    child: Center(
+                      child: Image.asset(
+                        'assets/image/Send.png',
+                        height: 15, // Adjusted height to match the container
+                        width: 17, // Adjusted width to match the container
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    'Transfer',
+                    style: TextStyle(color: Colors.white.withOpacity(0.5)),
+                  )
+                ],
+              ),
+              const SizedBox(
+                width: 40,
+              ),
+              Column(
+                children: [
+                  Container(
+                    height: 50,
+                    width: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: Colors.deepPurpleAccent,
+                    ),
+                    child: Center(
+                      child: Image.asset(
+                        'assets/image/Wallet 2.png',
+                        height: 15, // Adjusted height to match the container
+                        width: 17, // Adjusted width to match the container
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    'Deposit',
+                    style: TextStyle(color: Colors.white.withOpacity(0.5)),
+                  )
+                ],
+              ),
+            ],
+          )
+        ],
+      ),
+    )
+
+            // Column(
+            //   children: [
+            //     Center(
+            //         child: Text(
+            //       'Wallet',
+            //       style: TextStyle(
+            //           color: Colors.white,
+            //           fontSize: 20,
+            //           fontWeight: FontWeight.bold),
+            //     )),
+            //     SizedBox(height: 20),
+            //     // Padding(
+            //     //   padding: const EdgeInsets.all(8.0),
+            //     //   child: Column(
+            //     //     children: [
+            //     //       Container(
+            //     //           height: 100,
+            //     //           width: double.infinity,
+            //     //           decoration: BoxDecoration(
+            //     //             borderRadius: BorderRadius.circular(12),
+            //     //             color: HexColor('232336'),
+            //     //           ),
+            //     //           child: Padding(
+            //     //             padding: const EdgeInsets.all(12.0),
+            //     //             child: Row(
+            //     //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     //               children: [
+            //     //                 Image.asset(
+            //     //                   'images/Ethereum icon.png',
+            //     //                   height: 32,
+            //     //                   width: 32,
+            //     //                 ),
+            //     //                 Column(
+            //     //                   mainAxisAlignment:
+            //     //                       MainAxisAlignment.spaceBetween,
+            //     //                   crossAxisAlignment: CrossAxisAlignment.start,
+            //     //                   children: [
+            //     //                     Text(
+            //     //                       'Ethereum',
+            //     //                       style: TextStyle(
+            //     //                         color: HexColor('E4E4F0'),
+            //     //                         fontSize: 17,
+            //     //                       ),
+            //     //                     ),
+            //     //
+            //     //                     //button
+            //     //                     ElevatedButton(
+            //     //                       onPressed: () async {
+            //     //                         setState(() {
+            //     //                           isLoading = true;
+            //     //                         });
+            //     //                         await fetchWalletAddress(context);
+            //     //                         _showDepModal(context);
+            //     //                         //show modal bottom sheet
+            //     //                       },
+            //     //                       style: ElevatedButton.styleFrom(
+            //     //                         backgroundColor: HexColor('4A4A58'),
+            //     //                         shape: RoundedRectangleBorder(
+            //     //                           borderRadius: BorderRadius.circular(12),
+            //     //                         ),
+            //     //                       ),
+            //     //                       child: Text(
+            //     //                         'Deposit',
+            //     //                         style: TextStyle(
+            //     //                           color: HexColor('E4E4F0'),
+            //     //                           fontSize: 17,
+            //     //                         ),
+            //     //                       ),
+            //     //                     ),
+            //     //                   ],
+            //     //                 ),
+            //     //                 const SizedBox(
+            //     //                   width: 100,
+            //     //                 ),
+            //     //                 Column(
+            //     //                   crossAxisAlignment: CrossAxisAlignment.end,
+            //     //                   mainAxisAlignment:
+            //     //                       MainAxisAlignment.spaceBetween,
+            //     //                   children: [
+            //     //                     Text(
+            //     //                       'Balance: \$2000',
+            //     //                       style: TextStyle(
+            //     //                         color: HexColor('E4E4F0'),
+            //     //                       ),
+            //     //                     ),
+            //     //                     //withdraw button
+            //     //                     ElevatedButton(
+            //     //                       onPressed: () {
+            //     //                         // Get.to(() => CoinPage());
+            //     //                       },
+            //     //                       style: ElevatedButton.styleFrom(
+            //     //                         backgroundColor: HexColor('4A4A58'),
+            //     //                         shape: RoundedRectangleBorder(
+            //     //                           borderRadius: BorderRadius.circular(12),
+            //     //                         ),
+            //     //                       ),
+            //     //                       child: Text(
+            //     //                         'Withdraw',
+            //     //                         style: TextStyle(
+            //     //                           color: HexColor('E4E4F0'),
+            //     //                           fontSize: 17,
+            //     //                         ),
+            //     //                       ),
+            //     //                     ),
+            //     //                   ],
+            //     //                 ),
+            //     //               ],
+            //     //             ),
+            //     //           )),
+            //     //     ],
+            //     //   ),
+            //     // ),
+            //
+            //
+            //   ],
+            // ),
+            ));
   }
 }
