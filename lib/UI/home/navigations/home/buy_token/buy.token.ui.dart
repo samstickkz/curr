@@ -18,7 +18,12 @@ class BuyTokenScreen extends StatelessWidget {
         borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Theme.of(context).dividerColor,
+            title: const AppText('Make Deposit'),
+            centerTitle: true,
+            elevation: 0,
+
+
+            // backgroundColor: Theme.of(context).dividerColor,
           ),
           body: Padding(
             padding: 16.0.padH,
