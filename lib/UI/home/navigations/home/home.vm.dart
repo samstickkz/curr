@@ -66,7 +66,7 @@ class HomePageViewModel extends BaseViewModel{
           minChildSize: 0.6,
           maxChildSize: 0.9,
           builder: (_, scrollController){
-            return const BuyTokenScreen();
+            return  BuyTokenScreen();
           }
         );
       },

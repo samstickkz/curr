@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import '../../../constants/palette.dart';
 import '../../../constants/reuseables.dart';
 import '../../../utils/widget_extensions.dart';
 import '../../../widgets/app_button.dart';
 import '../../../widgets/apptexts.dart';
 import '../../../widgets/text_field.dart';
+import '../../home/navigations/home/home.ui.dart';
 import 'login.vm.dart';
 import '../../base.ui.dart';
 import '../../../utils/string-extensions.dart';
@@ -88,6 +91,10 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               AppButton(
+                // onTap: () => Get.to(HomePage()),
+                // //naviatge to homepage
+                // onTap: () => Get.to(HomePage()),
+
                 onTap: model.loginCheck,
                 isGradient: true,
                 text: 'Sign In',
