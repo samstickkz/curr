@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -140,13 +141,36 @@ class _WalletDepositState extends State<WalletDeposit> {
       ),
     );
   }
+  final List<String> names = ['John', 'Alice', 'Bob', 'Eve'];
+  final ScrollController _scrollController = ScrollController();
+  double _scrollOffset = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    _startScrolling();
+  }
+
+  void _startScrolling() {
+    Timer.periodic(Duration(milliseconds: 20), (timer) {
+      if (_scrollController.hasClients) {
+        setState(() {
+          _scrollOffset += 1.0;
+          _scrollController.jumpTo(_scrollOffset);
+          if (_scrollOffset >= _scrollController.position.maxScrollExtent) {
+            _scrollOffset = 0.0;
+          }
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
             child: Padding(
-      padding: const EdgeInsets.only(top: 20.0),
+      padding: const EdgeInsets.only(top: 20.0, left: 35, right: 35),
       child: Column(
         children: [
           const Row(
@@ -289,7 +313,114 @@ class _WalletDepositState extends State<WalletDeposit> {
                 ],
               ),
             ],
-          )
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          const Row(
+            children: [
+              Text('Latest Winners',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  )),
+            ],
+          ),
+
+          const SizedBox(
+            height: 20,
+          ),
+          //latest winners slide in containers with blue background
+          // Expanded(
+          //
+          //   child: ListView(
+          //
+          //     scrollDirection: Axis.horizontal,
+          //     children: [
+          //       Container(
+          //         height: 90,
+          //         width: 126,
+          //         decoration: BoxDecoration(
+          //           borderRadius: BorderRadius.circular(12),
+          //           color: Colors.deepPurpleAccent,
+          //         ),
+          //       ),    Container(
+          //         height: 90,
+          //         width: 126,
+          //         decoration: BoxDecoration(
+          //           borderRadius: BorderRadius.circular(12),
+          //           color: Colors.deepPurpleAccent,
+          //         ),
+          //       ),    Container(
+          //         height: 90,
+          //         width: 126,
+          //         decoration: BoxDecoration(
+          //           borderRadius: BorderRadius.circular(12),
+          //           color: Colors.deepPurpleAccent,
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // )
+          //     Container(
+          //       height: 50.0,
+          //       width: double.infinity,
+          //       // color: Colors.white.withOpacity(0.5),
+          //       child: ListView.builder(
+          //         scrollDirection: Axis.horizontal,
+          //         itemCount: names.length * 2, // A large number to simulate infinite scrolling
+          //         itemBuilder: (context, index) {
+          //           final nameIndex = index % names.length;
+          //           return Container(
+          //             width: 120.0, // Adjust the width as needed
+          //             margin: EdgeInsets.symmetric(horizontal: 8.0), // Add spacing between boxes
+          //             alignment: Alignment.center,
+          //             decoration: BoxDecoration(
+          //               borderRadius: BorderRadius.circular(12),
+          //               border: Border.all(color: Colors.deepPurpleAccent), // Add borders around each box
+          //             ),
+          //             child: Text(
+          //               names[nameIndex],
+          //               style: TextStyle(fontSize: 18.0, color: Colors.white
+          //             ),
+          //           ));
+          //         },
+          //       ),
+          //     ),
+
+              Container(
+                height: 50.0,
+                width: double.infinity,
+                // color: Colors.white.withOpacity(0.5),
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  controller: _scrollController,
+                  itemCount: names.length * 2, // A large number to simulate infinite scrolling
+                  itemBuilder: (context, index) {
+                    final nameIndex = index % names.length;
+                    return Container(
+                      width: 120.0, // Adjust the width as needed
+                      margin: EdgeInsets.symmetric(horizontal: 8.0), // Add spacing between boxes
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.deepPurpleAccent), // Add borders around each box
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            names[nameIndex],
+                            style: TextStyle(fontSize: 18.0, color: Colors.white),
+
+                          ),
+                          Text('\$2000', style: TextStyle(fontSize: 10.0, color: Colors.green),),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
         ],
       ),
     )
@@ -411,5 +542,10 @@ class _WalletDepositState extends State<WalletDeposit> {
             //   ],
             // ),
             ));
+  }
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 }
