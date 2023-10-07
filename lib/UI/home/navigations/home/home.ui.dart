@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 import '../../../../constants/palette.dart';
 import '../../../../widgets/apptexts.dart';
@@ -80,12 +81,12 @@ class HomePage extends StatelessWidget {
                             // buy button
                             HomeButtons(
                               onTap: (){},
-                              icon: Icons.arrow_upward_outlined,
+                              icon: Iconsax.arrow_up_11,
                               title: 'Buy',
                             ),
                             HomeButtons(
                               onTap: model.navigateToBalance,
-                              icon: Icons.add,
+                              icon: Iconsax.add,
                               title: 'Sell',
                             ),
                             HomeButtons(
