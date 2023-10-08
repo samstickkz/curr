@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 
+import 'package:curr/core/cache/sharedpreferences.dart';
 import 'package:curr/routes/routes.dart';
 import 'package:curr/utils/snack_message.dart';
 import 'package:dio/dio.dart';
@@ -36,47 +37,65 @@ connect() {
         if (value != null && value.isNotEmpty) {
           options.headers['Authorization'] = "Bearer " + value;
         }
-        options.uri.path=="/api/tokens" || options.uri.path=="/api/users/self-register" || options.uri.path=="api/users/forgot-password"? options.headers["tenant"] = "root":null;
+        options.uri.path=="/api/tokens" ||
+            options.uri.path=="/api/users/self-register" ||
+            options.uri.path=="api/users/forgot-password" ||
+            options.uri.path=="api/tokens/refresh" ||
+            options.uri.path=="api/personal/change-password"
+            ? options.headers["tenant"] = "root":null;
         return handler.next(options);
       },
       onResponse: (response, handler) async {
+        print(response.data);
         return handler.next(response);
       },
       onError: (DioError e, handler) async {
-        print("status code: ${e.message}");
-        print("status message: ${e.error}");
-        print(e.response?.statusCode);
-        print("${e.response?.data.toString()}");
+        print("${e.response?.statusCode}  ::::  ${e.response?.data.toString()}");
         List error = jsonDecode(e.response!.data)['messages'];
         String errorMessage = error.isEmpty? jsonDecode(e.response!.data)['exception']: formatErrorMessageList(convertDynamicListToStringList(jsonDecode(e.response!.data)['messages']));
-        print("ERRORMESSAGE::: $errorMessage");
         showCustomToast(errorMessage);
-        try {
-          if ((e.response?.statusCode == 401 &&
-              jsonDecode(e.response!.data)['messages'] != null &&
-              jsonDecode(e.response!.data)['messages']
-                  .toString()
-                  .contains("token"))) {
-            if (await storageService.hasKey(key: 'refreshToken')) {
-              if (await refreshAuthToken()) {
-                return handler.resolve(await _retry(e.requestOptions));
+
+        if(e.response?.statusCode==401){
+          String? val = await storageService.readItem(key: expiryDate);
+          if(val!=null){
+            DateTime date = DateTime.parse(val);
+            if(date.isBefore(DateTime.now())){
+              if (await storageService.hasKey(key: 'refreshToken')) {
+                try{
+                  if (await refreshAuthToken()) {
+                    return handler.resolve(await _retry(e.requestOptions));
+                  }else{
+                    await storageService.storage.deleteAll();
+                    await prefs?.clear();
+                    locator<NavigationService>().navigateToAndRemoveUntil(loginRoute);
+                    return handler.next(e);
+                  }
+                }on DioError catch (e) {
+                  return handler.next(e);
+                }
+              }else{
+                return handler.next(e);
               }
+            }else{
+              return handler.next(e);
             }
+          }else{
+            return handler.next(e);
           }
-        } on DioError catch (e) {
+        }else{
           return handler.next(e);
         }
-        //token is expired
-        //log user out
-        if (e.response?.statusCode == 401 &&
-            jsonDecode(e.response!.data)['messages'] != null &&
-            jsonDecode(e.response!.data)['messages']
-                .toString()
-                .contains("token")) {
-          await storageService.storage.deleteAll();
-          locator<NavigationService>().navigateToAndRemoveUntil(loginRoute);
-        }
-        return handler.next(e);
+
+
+        // if (e.response?.statusCode == 401 &&
+        //     jsonDecode(e.response!.data)['messages'] != null &&
+        //     jsonDecode(e.response!.data)['messages']
+        //         .toString()
+        //         .contains("token")) {
+        //   await storageService.storage.deleteAll();
+        //   locator<NavigationService>().navigateToAndRemoveUntil(loginRoute);
+        // }
+        // return handler.next(e);
       },
     ),
   );

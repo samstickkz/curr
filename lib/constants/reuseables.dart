@@ -8,6 +8,7 @@ enum ViewState {
 
 class AppString {
   static const String login = 'Login';
+  static const String profilePic = 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?size=626&ext=jpg&ga=GA1.2.639824460.1690745363&semt=ais';
 
 }
 
@@ -82,6 +83,7 @@ class AppImages {
   static const String pen = "assets/svg/edit_pen.svg";
   static const String twoFa = "assets/svg/2fa.svg";
   static const String delete = "assets/svg/bin.svg";
+  static const String fingerprint = "assets/svg/fingerprint.svg";
   static const String stars = "assets/svg/star.svg";
   static const String theme = "assets/svg/change_theme_icon.svg";
   static const String dollarBag = "assets/svg/dollar_money_bag.svg";

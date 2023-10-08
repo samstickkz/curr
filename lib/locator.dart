@@ -1,3 +1,4 @@
+import 'package:curr/UI/home/navigations/profile/change_password/change_password.vm.dart';
 import 'package:get_it/get_it.dart';
 
 import 'UI/auth/forget_password/forget.password.vm.dart';
@@ -10,6 +11,7 @@ import 'UI/home/navigations/draw/draw_entry_point.vm.dart';
 import 'UI/home/navigations/home/buy_token/buy.token.vm.dart';
 import 'UI/home/navigations/home/drawer/drawer.vm.dart';
 import 'UI/home/navigations/home/home.vm.dart';
+import 'UI/home/navigations/profile/edit_profile/edit.profile.vm.dart';
 import 'UI/home/navigations/profile/profile.home.vm.dart';
 import 'core/repository/repository.dart';
 import 'core/services/local_services/app-cache.dart';
@@ -56,8 +58,8 @@ void registerViewModels() {
   locator.registerFactory<ProfileHomeViewModel>(() => ProfileHomeViewModel());
   locator.registerFactory<ForgetPasswordViewModel>(() => ForgetPasswordViewModel());
   locator.registerFactory<ResetPasswordViewModel>(() => ResetPasswordViewModel());
-  // locator.registerFactory<FinishPinViewModel>(() => FinishPinViewModel());
-  // locator.registerFactory<CheckPinViewModel>(() => CheckPinViewModel());
+  locator.registerFactory<EditProfileViewModel>(() => EditProfileViewModel());
+  locator.registerFactory<ChangePasswordViewModel>(() => ChangePasswordViewModel());
   locator.registerFactory<DrawEntryPointViewModel>(() => DrawEntryPointViewModel());
 
 
