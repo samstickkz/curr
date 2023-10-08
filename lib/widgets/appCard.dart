@@ -29,7 +29,7 @@ class AppCard extends StatelessWidget {
         margin: margin,
         padding: padding?? const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         decoration: decoration?? ShapeDecoration(
-          color: backgroundColor ?? const Color(0xFF1A1A24),
+          color: backgroundColor ?? const Color(0xFF1A1A24).withOpacity(0.4),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(radius ?? 10),
           ),

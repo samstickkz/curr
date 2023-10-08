@@ -34,18 +34,23 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen>  with S
             backgroundColor: primaryColor,
             child: SvgPicture.asset(AppImages.stars, height: 24, width: 24, color: Colors.black, fit: BoxFit.cover,),
           ),
-        ): Stack(
+        ):
+        Stack(
           children: [
-            Scaffold(
-              body: model.pages[model.currentIndex],
-              bottomNavigationBar: _BottomNavigationBar(
-                onItemSelected: model.changePage,
+            SafeArea(
+              bottom: true,
+              top: false,
+              child: Scaffold(
+                body: model.pages[model.currentIndex],
+                bottomNavigationBar: _BottomNavigationBar(
+                  onItemSelected: model.changePage,
+                ),
               ),
             ),
             Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
-                    padding: const EdgeInsets.only(bottom: 60),
+                    padding: const EdgeInsets.only(bottom: 40),
                     child: FloatingActionButton(
                       onPressed: model.navigateToDraw,
                       backgroundColor: primaryColor,

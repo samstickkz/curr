@@ -1,6 +1,7 @@
 import 'package:curr/utils/widget_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 import '../../constants/palette.dart';
@@ -130,7 +131,7 @@ class _AppTextFieldState extends State<AppTextField> {
                   setState(() {
                     isVisible = !isVisible;
                   });
-                }, icon: widget.suffixIcon?? Icon(isVisible ? Icons.visibility_off : Icons.visibility)
+                }, icon: widget.suffixIcon?? Icon(isVisible ? Iconsax.eye_slash : Iconsax.eye)
               ) :widget.suffixIcon,
               filled: true,
               label: widget.label,

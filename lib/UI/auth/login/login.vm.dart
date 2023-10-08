@@ -34,7 +34,7 @@ class LoginViewModel extends BaseViewModel{
     try{
       var response = await repository.getUser();
       await initializer.init();
-      navigationService.navigateTo(bottomNavigationRoute);
+      navigationService.navigateToAndRemoveUntil(bottomNavigationRoute);
       stopLoader();
       notifyListeners();
       return response;

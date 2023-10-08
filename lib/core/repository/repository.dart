@@ -36,6 +36,26 @@ class Repository {
     return await authApi.forgetPassword(email: email);
   }
 
+  Future<Either<ResModel, String>> changePassword({
+    required String password,
+    required String newPassword,
+    required String confirmNewPassword
+  }) async {
+    return await authApi.changePassword(password: password, newPassword: newPassword, confirmNewPassword: confirmNewPassword);
+  }
+
+  Future<Either<ResModel, String>> updateProfile({
+    required String email,
+    required String username,
+    required String firstName,
+    required String lastName,
+    required String phoneNumber,
+    String? image,
+    bool? deletePrevious,
+  }) async {
+    return await authApi.updateProfile(email: email, username: username, firstName: firstName, lastName: lastName, phoneNumber: phoneNumber, image: image, deletePrevious: deletePrevious);
+  }
+
   Future<Either<ResModel, String>> resetPassword({
     required String email,
     required String password,

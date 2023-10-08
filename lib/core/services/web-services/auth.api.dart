@@ -35,8 +35,86 @@ class AuthenticationApiService {
     } on DioError catch (e) {
       return Left(resModelFromJson(e.response?.data));
     } catch (e) {
-      print("Definately Here");
       return Left(ResModel(messages: [e.toString()]));
+    }
+  }
+
+  Future<Either<ResModel, String>> updateProfile({
+    required String email,
+    required String username,
+    required String firstName,
+    required String lastName,
+    required String phoneNumber,
+    String? image,
+    bool? deletePrevious,
+  }) async {
+    try {
+      var response = await connect().put("personal/profile", data: image!=null?{
+        "id": userService.userCredentials.id,
+        "firstName": firstName,
+        "lastName": lastName,
+        "email": email,
+        "phoneNumber": phoneNumber,
+        "image": {
+          "name": "<string>",
+          "extension": "<string>",
+          "data": "<string>"
+        },
+        "deleteCurrentImage": deletePrevious??false
+      }:{
+        "id": userService.userCredentials.id,
+        "firstName": firstName,
+        "lastName": lastName,
+        "email": email,
+        "phoneNumber": phoneNumber,
+        "deleteCurrentImage": false
+      }
+      );
+
+      if(response.statusCode==200|| response.statusCode==201){
+        print(response.data);
+        showCustomToast(response.data.toString(), success: true);
+        return Right(response.data.toString());
+      }else{
+        List error = jsonDecode(response.data)['messages'];
+        String errorMessage = error.isEmpty? jsonDecode(response.data)['exception']: formatErrorMessageList(convertDynamicListToStringList(jsonDecode(response.data)['messages']));
+        showCustomToast(errorMessage);
+        return Left(resModelFromJson(response.data));
+      }
+
+    } on DioError catch (err) {
+      List error = jsonDecode(err.response.toString())['messages'];
+      String errorMessage = error.isEmpty? jsonDecode(err.response.toString())['exception']: formatErrorMessageList(convertDynamicListToStringList(error));
+
+      showCustomToast(errorMessage);
+      return Left(ResModel.fromJson(jsonDecode(jsonEncode(err.response))));
+    }
+  }
+
+  Future<Either<ResModel, String>> changePassword({
+    required String password,
+    required String newPassword,
+    required String confirmNewPassword
+  }) async {
+    try {
+      var response = await connect().put("personal/change-password", data: {
+        "password": password,
+        "newPassword": newPassword,
+        "confirmNewPassword": confirmNewPassword,
+      });
+
+      if(response.statusCode==200|| response.statusCode==201){
+        print(response.data);
+        showCustomToast(response.data.toString(), success: true);
+        return Right(response.data.toString());
+      }else{
+        List error = jsonDecode(response.data)['messages'];
+        // String errorMessage = error.isEmpty? jsonDecode(response.data)['exception']: formatErrorMessageList(convertDynamicListToStringList(jsonDecode(response.data)['messages']));
+        return Left(resModelFromJson(response.data));
+      }
+
+    } on DioError catch (err) {
+      return Left(ResModel.fromJson(jsonDecode(jsonEncode(err.response))));
     }
   }
 

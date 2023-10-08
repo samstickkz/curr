@@ -6,6 +6,8 @@ import '../UI/auth/register/register.ui.dart';
 import '../UI/home/bottom_navigation.ui.dart';
 import '../UI/home/navigations/draw/draw_entry_point.dart';
 import '../UI/home/navigations/home/coinpage_api/coinpage.dart';
+import '../UI/home/navigations/profile/change_password/change_password.ui.dart';
+import '../UI/home/navigations/profile/edit_profile/edit.profile.ui.dart';
 import '../UI/onboarding/main_onboarding.dart';
 import '../UI/splash/spalsh_screen.dart';
 import '../core/services/local_services/app-cache.dart';
@@ -37,6 +39,10 @@ class Routers {
         return MaterialPageRoute(builder: (_) => const BottomNavigationScreen());
       case buyBal:
         return MaterialPageRoute(builder: (_) => const Bbal());
+      case editProfile:
+        return MaterialPageRoute(builder: (_) => const EditProfileScreen());
+      case changePasswordRoute:
+        return MaterialPageRoute(builder: (_) => const ChangePasswordScreen());
       case drawEntryPointRoute:
         return MaterialPageRoute(builder: (_) => const DrawEntryPointScreen());
     //   case createPinRouteOne:
