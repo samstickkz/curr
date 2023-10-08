@@ -45,37 +45,22 @@ class _RegisterPageState extends State<RegisterPage> {
                         ],
                       ),
                       20.0.sbH,
-                      AppTextField(
-                        hint: "First name",
-                        controller: model.firstNameController,
-                        autofillHints: const [AutofillHints.givenName, AutofillHints.familyName],
-                        validator: emptyValidator,
-                        onChanged: (val){
-                          model.formKey.currentState?.validate();
-                        },
-                      ),
-                      15.0.sbH,
-                      AppTextField(
-                        hint: "Last name",
-                        controller: model.lastNameController,
-                        autofillHints: const [AutofillHints.givenName, AutofillHints.familyName],
-                        validator: emptyValidator,
-                        onChanged: (val){
-                          model.formKey.currentState?.validate();
-                        },
-                      ),
-                      15.0.sbH,
-                      AppTextField(
-                        hint: "UserName",
-                        keyboardType: TextInputType.visiblePassword,
-                        controller: model.userNameController,
-                        autofillHints: const [AutofillHints.username],
-                        validator: emptyValidator,
-                        onChanged: (val){
-                          model.formKey.currentState?.validate();
-                        },
-                      ),
-                      15.0.sbH,
+                      // AppTextField(
+                      //   hint: "Full name",
+                      //   keyboardType: TextInputType.visiblePassword,
+                      //   controller: model.fullNameController,
+                      //   autofillHints: const [AutofillHints.givenName, AutofillHints.middleName, AutofillHints.familyName],
+                      //   validator: (val){
+                      //     String value = val??"";
+                      //     if (!validateFullName(value.trim())) {
+                      //       return "Invalid full name";
+                      //     }
+                      //   },
+                      //   onChanged: (val){
+                      //     model.formKey.currentState?.validate();
+                      //   },
+                      // ),
+                      // 15.0.sbH,
                       AppTextField(
                         hint: "Email Address",
                         keyboardType: TextInputType.emailAddress,
@@ -84,26 +69,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         validator: emailValidator,
                         onChanged: (val){
                           model.formKey.currentState?.validate();
-                        },
-                      ),
-                      15.0.sbH,
-                      CustomPhoneNumberInput(
-                        // controller: model.phoneNumberController,
-                        isoCode: model.countryCode,
-                        onInputChanged: (v) {
-                          model.countryCode = v.dialCode;
-                          model.phoneNumber = v.phoneNumber;
-                          model.formKey.currentState?.validate();
-                        },
-                        validator: (val){
-                          String phoneNumber = model.phoneNumber??"";
-                          if(model.countryCode==null){
-                            return "Select A country to proceed";
-                          }else if(phoneNumber.isEmpty){
-                            return "Phone Number cannot be empty";
-                          }else if(phoneNumber.length<11){
-                            return "Enter a correct phone number";
-                          }
                         },
                       ),
                       15.0.sbH,
@@ -137,34 +102,85 @@ class _RegisterPageState extends State<RegisterPage> {
                         },
                         isPassword: true,
                       ),
-                      16.0.sbH,
-                      AppButton(
-                        onTap: model.register,
-                        isGradient: true,
-                        text: 'Register',
+                      15.0.sbH,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          CupertinoCheckbox(value: model.isActive, onChanged: model.changeStatus, activeColor: primaryColor,),
+                          16.0.sbH,
+                          Expanded(child: RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'I have read and accepted the ',
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: 'Terms and Conditions',
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    color: primaryColor,
+                                  ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = (){}, // Add tap gesture recognizer
+                                ),
+                              ],
+                            ),
+                          ))
+                        ],
                       ),
-
-                      25.0.sbH,
+                      15.0.sbH,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Expanded(
                             child: AppText(
-                              'Got an account?', size: 15,align: TextAlign.end,
+                              'Got an account?', size: 14,align: TextAlign.end,
                             ),
                           ),
                           InkWell(
                             onTap: navigationService.goBack,
                             child: AppText(
-                              ' Sign in instead', isBold: true, size: 15,
+                              ' Sign in instead', isBold: true, size: 14,
                               color: primaryColor,
                             ),
                           ),
                         ],
                       ),
-                      50.0.sbH,
+                      15.0.sbH,
+
                     ],
                   ),
+                ),
+                Column(
+                  children: [
+                    AppButton(
+                      onTap: model.register,
+                      isGradient: true,
+                      text: 'Register',
+                    ),
+                    16.0.sbH,
+                    // AppButton(
+                    //   onTap: model.authApi.signinWithGoogle,
+                    //   isTransparent: true,
+                    //   child: Row(
+                    //     children: [
+                    //       Image.asset(
+                    //         'images/Google.png',
+                    //         width: 18,
+                    //         height: 18,
+                    //       ),
+                    //       10.0.sbW,
+                    //       const AppText(
+                    //           'SignUp in Google'
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+                    40.0.sbH
+                  ],
                 ),
               ],
             ),

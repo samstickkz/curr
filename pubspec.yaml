@@ -45,7 +45,7 @@ dependencies:
   flutter_dotenv: ^5.0.2
   http: ^0.13.5
   intl: ^0.17.0
-  local_auth: ^2.1.6
+  local_auth: ^2.1.7
   flutter_screenutil: ^5.7.0
   animated_text_kit: ^4.2.2
   math_expressions: ^2.4.0
@@ -68,6 +68,7 @@ dependencies:
   dartz: ^0.10.1
   intl_phone_number_input: ^0.7.3+1
   awesome_flutter_extensions: ^1.1.1
+  iconsax: ^0.0.8
 
 dev_dependencies:
   flutter_test:
@@ -89,7 +90,7 @@ flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
-  uses-material-design: true
+  #  uses-material-design: true P@$$w0rd
 
   # To add assets to your application, add an assets section, like this:
   assets:
@@ -114,13 +115,13 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Space-Grotesk
-      fonts:
-        - asset: assets/font/SpaceGrotesk-Regular.ttf
-        - asset: assets/font/SpaceGrotesk-SemiBold.ttf
-          weight: 700
-        - asset: assets/font/SpaceGrotesk-Bold.ttf
-          weight: 900
+      - family: Space-Grotesk
+        fonts:
+          - asset: assets/font/SpaceGrotesk-Regular.ttf
+          - asset: assets/font/SpaceGrotesk-SemiBold.ttf
+            weight: 700
+          - asset: assets/font/SpaceGrotesk-Bold.ttf
+            weight: 900
   # fonts:
   #   - family: Schyler
   #     fonts:

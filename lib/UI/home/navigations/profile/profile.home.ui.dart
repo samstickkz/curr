@@ -1,6 +1,7 @@
 import 'package:curr/utils/widget_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:iconsax/iconsax.dart';
 
 import '../../../../constants/reuseables.dart';
 import '../../../../widgets/appCard.dart';
@@ -19,8 +20,9 @@ class ProfileHomeScreen extends StatelessWidget {
       },
       builder: (_, model, child)=> Scaffold(
         appBar: AppBar(
-          title: Text("Profile"),
+          title: const Text("Profile"),
           centerTitle: true,
+          leading: null,
         ),
         body: Padding(
           padding: 16.0.padH,
@@ -57,10 +59,10 @@ class ProfileHomeScreen extends StatelessWidget {
                                       backgroundColor: Colors.greenAccent.withOpacity(0.2),
                                       radius: 30,
                                       expandable: true,
-                                      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                                      child: AppText("KYC Verified", color: Colors.lightGreenAccent,),
+                                      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                                      child: const AppText("KYC Verified", color: Colors.lightGreenAccent,),
                                     ),
-                                    Expanded(child: SizedBox())
+                                    const Expanded(child: SizedBox())
                                   ],
                                 )
                               ],
@@ -71,7 +73,7 @@ class ProfileHomeScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               InkWell(
-                                onTap: (){},
+                                onTap: model.navigateToEditProfile,
                                 child: SvgPicture.asset(AppImages.pen, height: 24, width: 24,)
                               ),
                             ],
@@ -83,7 +85,7 @@ class ProfileHomeScreen extends StatelessWidget {
                 ),
               ),
               20.0.sbH,
-              const AppText("General", size: 15,),
+              AppText("General".toUpperCase(), size: 14,),
               10.0.sbH,
               ListView.builder(
                 shrinkWrap: true,
@@ -92,22 +94,22 @@ class ProfileHomeScreen extends StatelessWidget {
                 itemBuilder: (_,i)=> ProfileCard(svgImage: model.general[i].svgImage??"", title: model.general[i].title??"", onTap: model.general[i].onTap,)
               ),
               20.0.sbH,
-              const AppText("Security", size: 15,),
+              AppText("Security".toUpperCase(), size: 14,),
               10.0.sbH,
-              ProfileCard(svgImage: AppImages.passwordIcon, title: "Change Password", onTap: (){},),
-              ProfileCard(svgImage: AppImages.twoFa, title: "Activate 2FA", onTap: (){},),
+              ProfileCard(svgImage: AppImages.passwordIcon, title: "Change Password", onTap: model.navigateToChangePassword,),
               ProfileCard(svgImage: AppImages.resetPassword, title: "Reset PIN", onTap: (){},),
+              ProfileCard(svgImage: AppImages.fingerprint, title: "Biometrics", onTap: (){},),
               20.0.sbH,
-              const AppText("Preferences", size: 15,),
+              AppText("Preferences".toUpperCase(), size: 14,),
               10.0.sbH,
               ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: model.preferences.length,
-                  itemBuilder: (_,i)=> ProfileCard(svgImage: model.preferences[i].svgImage??"", title: model.preferences[i].title??"", onTap: model.preferences[i].onTap,)
+                  itemBuilder: (_,i)=> ProfileCard(svgImage: model.preferences[i].svgImage??"", title: model.preferences[i].title??"", onTap: model.preferences[i].onTap,  child: Switch(value: false, onChanged: (v){},),)
               ),
               20.0.sbH,
-              const AppText("Others", size: 15,),
+              AppText("Others".toUpperCase(), size: 14,),
               10.0.sbH,
               ProfileCard(svgImage: model.others[0].svgImage??"", title: model.others[0].title??"", onTap:(){},),
               // ListView.builder(
@@ -116,10 +118,9 @@ class ProfileHomeScreen extends StatelessWidget {
               //     itemCount: model.others.length,
               //     itemBuilder: (_,i)=> ProfileCard(svgImage: model.others[i].svgImage??"", title: model.others[i].title??"", onTap: model.others[i].onTap,)
               // ),
-              20.0.sbH,
               ProfileCard(svgImage: model.account[0].svgImage??"", title: model.account[0].title??"", onTap:()=> model.popLogout(context),),
               ProfileCard(svgImage: model.account[1].svgImage??"", title: model.account[1].title??"", isLogout: true , onTap: (){},),
-              30.0.sbH
+              100.0.sbH
             ],
           ),
         ),
@@ -143,14 +144,15 @@ class ProfileCard extends StatelessWidget {
     return Column(
       children: [
         AppCard(
+          padding: 16.0.padA,
           onTap: onTap,
           child: Row(
             children: [
               SvgPicture.asset(svgImage, color: isLogout==true? Colors.red:null,),
               16.0.sbW,
-              Expanded(child: AppText(title, size: 17, weight: FontWeight.w700, maxLine: 1, overflow: TextOverflow.ellipsis, color: isLogout==true? Colors.red:null,)),
+              Expanded(child: AppText(title, size: 17, weight: FontWeight.w700, overflow: TextOverflow.ellipsis, color: isLogout==true? Colors.red:null,)),
               16.0.sbW,
-              child ?? Icon(Icons.arrow_forward_ios, size: 16,)
+              child ?? const Icon(Iconsax.arrow_right_34, size: 16,)
             ],
           ),
         ),

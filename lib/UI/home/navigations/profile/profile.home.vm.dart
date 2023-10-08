@@ -1,3 +1,4 @@
+import 'package:curr/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../constants/reuseables.dart';
@@ -12,6 +13,14 @@ class ProfileHomeViewModel extends BaseViewModel{
   }
 
   late BuildContext context;
+
+  navigateToEditProfile(){
+    navigationService.navigateTo(editProfile);
+  }
+
+  navigateToChangePassword(){
+    navigationService.navigateTo(changePasswordRoute);
+  }
 
   List<ProfileButtonModel> account = [
   ProfileButtonModel(title: "Logout", svgImage: AppImages.logoutIcon,),

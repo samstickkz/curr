@@ -8,6 +8,8 @@ class User {
   bool? emailConfirmed;
   String? phoneNumber;
   String? imageUrl;
+  String? name;
+  bool? isHidden;
 
   User(
       {this.id,
@@ -19,6 +21,8 @@ class User {
         this.emailConfirmed,
         this.phoneNumber,
         this.imageUrl,
+        this.name
+
       });
 
   User.fromJson(Map<String, dynamic> json) {
@@ -31,6 +35,9 @@ class User {
     emailConfirmed = json['emailConfirmed'];
     phoneNumber = json['phoneNumber'];
     imageUrl = json['imageUrl'];
+    name = json['name'];
+    isHidden = json['isHidden'];
+
   }
 
   Map<String, dynamic> toJson() {

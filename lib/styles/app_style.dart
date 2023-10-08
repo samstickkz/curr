@@ -18,7 +18,7 @@ class Style {
         focusColor: const Color(0xff0B2512),
         splashColor: primaryColor.withOpacity(0.2),
         disabledColor: Colors.grey,
-        cardColor: Colors.black,
+        cardColor: Color(0xFF212121),
         canvasColor:  Colors.black,
         brightness: Brightness.dark,
         textTheme: TextTheme(
