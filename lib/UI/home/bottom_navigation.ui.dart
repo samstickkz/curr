@@ -1,3 +1,4 @@
+import 'package:curr/utils/widget_extensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -24,39 +25,29 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen>  with S
 
       },
       builder: (_, model, child) {
-        return Theme.of(context).platform==TargetPlatform.android? Scaffold(
-            body: model.pages[model.currentIndex],
-            bottomNavigationBar: _BottomNavigationBar(
-              onItemSelected: model.changePage,
-            ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: model.navigateToDraw,
-            backgroundColor: primaryColor,
-            child: SvgPicture.asset(AppImages.stars, height: 24, width: 24, color: Colors.black, fit: BoxFit.cover,),
-          ),
-        ):
-        Stack(
+        return Stack(
+          alignment: Alignment.bottomCenter,
           children: [
             SafeArea(
               bottom: true,
               top: false,
               child: Scaffold(
                 body: model.pages[model.currentIndex],
-                bottomNavigationBar: _BottomNavigationBar(
-                  onItemSelected: model.changePage,
-                ),
               ),
             ),
-            Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                    padding: const EdgeInsets.only(bottom: 40),
-                    child: FloatingActionButton(
-                      onPressed: model.navigateToDraw,
-                      backgroundColor: primaryColor,
-                      child: SvgPicture.asset(AppImages.stars, height: 24, width: 24, color: Colors.black, fit: BoxFit.cover,),
-                    )
-                )
+            _BottomNavigationBar(
+              onItemSelected: model.changePage,
+            ),
+            SafeArea(
+              bottom: true,
+              child: Padding(
+                padding: 30.0.padB,
+                child: FloatingActionButton(
+                  onPressed: model.navigateToDraw,
+                  backgroundColor: primaryColor,
+                  child: SvgPicture.asset(AppImages.stars, height: 24, width: 24, color: Colors.black, fit: BoxFit.cover,),
+                ),
+              ),
             ),
           ],
         );

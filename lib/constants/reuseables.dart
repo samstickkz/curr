@@ -83,6 +83,7 @@ class AppImages {
   static const String pen = "assets/svg/edit_pen.svg";
   static const String twoFa = "assets/svg/2fa.svg";
   static const String delete = "assets/svg/bin.svg";
+  static const String faceID = "assets/svg/faceID.svg";
   static const String fingerprint = "assets/svg/fingerprint.svg";
   static const String stars = "assets/svg/star.svg";
   static const String theme = "assets/svg/change_theme_icon.svg";
