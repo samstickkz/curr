@@ -1,3 +1,4 @@
+import 'package:curr/core/cache/sharedpreferences.dart';
 import 'package:curr/core/repository/repository.dart';
 import 'package:curr/core/repository/repository.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class BaseViewModel extends ChangeNotifier {
   ViewState _viewState = ViewState.idle;
   NavigationService navigationService = locator<NavigationService>();
   UserService userService = locator<UserService>();
+  SharedPreference preference = locator<SharedPreference>();
   Repository repository = locator<Repository>();
   AppCache appCache = locator<AppCache>();
   Initializer initializer = locator<Initializer>();
@@ -26,6 +28,7 @@ class BaseViewModel extends ChangeNotifier {
 
   logout()async{
     storageService.deleteAllItems();
+    preference.clear();
     userService.storeUser(null);
     await initializer.init();
     notifyListeners();
