@@ -66,6 +66,7 @@ class RegisterViewModel extends BaseViewModel {
           stopLoader();
         }
       }catch(err){
+        print(err);
         stopLoader();
         notifyListeners();
       }

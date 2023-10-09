@@ -1,6 +1,7 @@
 import 'package:curr/UI/home/navigations/profile/change_password/change_password.vm.dart';
 import 'package:get_it/get_it.dart';
 
+import 'UI/auth/biometric/biometric.vm.dart';
 import 'UI/auth/forget_password/forget.password.vm.dart';
 import 'UI/auth/forget_password/reset_password/reset.password.vm.dart';
 import 'UI/auth/login/login.vm.dart';
@@ -13,6 +14,7 @@ import 'UI/home/navigations/home/drawer/drawer.vm.dart';
 import 'UI/home/navigations/home/home.vm.dart';
 import 'UI/home/navigations/profile/edit_profile/edit.profile.vm.dart';
 import 'UI/home/navigations/profile/profile.home.vm.dart';
+import 'core/cache/sharedpreferences.dart';
 import 'core/repository/repository.dart';
 import 'core/services/local_services/app-cache.dart';
 import 'core/services/local_services/initializer.dart';
@@ -61,6 +63,7 @@ void registerViewModels() {
   locator.registerFactory<EditProfileViewModel>(() => EditProfileViewModel());
   locator.registerFactory<ChangePasswordViewModel>(() => ChangePasswordViewModel());
   locator.registerFactory<DrawEntryPointViewModel>(() => DrawEntryPointViewModel());
+  locator.registerFactory<UseBiometricViewModel>(() => UseBiometricViewModel());
 
 
 }
@@ -74,5 +77,6 @@ void registerServices(){
   locator.registerLazySingleton(() => AppCache());
   locator.registerLazySingleton(() => Repository());
   locator.registerLazySingleton<StorageService>(() => StorageService());
+  locator.registerLazySingleton<SharedPreference>(() => SharedPreference());
   locator.registerLazySingleton<AuthenticationApiService>(() => AuthenticationApiService());
 }

@@ -12,3 +12,4 @@ const String buyBal = '/buy_with_route';
 const String editProfile = '/edit_profile_route';
 const String forgotPasswordRoute = '/forgot_password_route';
 const String changePasswordRoute = '/change_user_password_route';
+const String useBioRoute = '/use_bio_route';

@@ -124,6 +124,7 @@ class SharedPreference extends ChangeNotifier {
     prefs!.setBool(twoFaBool, id);
     notifyListeners();
   }
+
   /// get user 2fa
   Future<bool> get2fa() async {
     prefs = await SharedPreferences.getInstance();

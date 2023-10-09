@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../UI/auth/biometric/biometric.ui.dart';
 import '../UI/auth/forget_password/forget.password.ui.dart';
 import '../UI/auth/forget_password/reset_password/reset.password.ui.dart';
 import '../UI/auth/login/login.ui.dart';
@@ -43,6 +44,8 @@ class Routers {
         return MaterialPageRoute(builder: (_) => const EditProfileScreen());
       case changePasswordRoute:
         return MaterialPageRoute(builder: (_) => const ChangePasswordScreen());
+      case useBioRoute:
+        return MaterialPageRoute(builder: (_) => const UseBiometricScreen());
       case drawEntryPointRoute:
         return MaterialPageRoute(builder: (_) => const DrawEntryPointScreen());
     //   case createPinRouteOne:

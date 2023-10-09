@@ -1,6 +1,8 @@
 import 'package:curr/utils/widget_extensions.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../constants/reuseables.dart';
@@ -17,6 +19,7 @@ class ProfileHomeScreen extends StatelessWidget {
     return BaseView<ProfileHomeViewModel>(
       onModelReady: (m)async {
         await m.addContext(context);
+        print(m.supportState);
       },
       builder: (_, model, child)=> Scaffold(
         appBar: AppBar(
@@ -98,15 +101,35 @@ class ProfileHomeScreen extends StatelessWidget {
               10.0.sbH,
               ProfileCard(svgImage: AppImages.passwordIcon, title: "Change Password", onTap: model.navigateToChangePassword,),
               ProfileCard(svgImage: AppImages.resetPassword, title: "Reset PIN", onTap: (){},),
-              ProfileCard(svgImage: AppImages.fingerprint, title: "Biometrics", onTap: (){},),
+              model.supportState?ProfileCard(
+                svgImage: AppImages.fingerprint, title: "Biometrics",
+                child: Transform.scale(
+                  scale: 0.7,
+                  child: CupertinoSwitch(
+                    value: model.twoFaVal, onChanged: model.changeBio,
+                    activeColor: context.theme.primaryColor,
+                  ),
+                )
+              ):0.0.sbH,
               20.0.sbH,
               AppText("Preferences".toUpperCase(), size: 14,),
               10.0.sbH,
               ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: model.preferences.length,
-                  itemBuilder: (_,i)=> ProfileCard(svgImage: model.preferences[i].svgImage??"", title: model.preferences[i].title??"", onTap: model.preferences[i].onTap,  child: Switch(value: false, onChanged: (v){},),)
+                  itemCount: model.preferencez.length,
+                  itemBuilder: (_,i)=> ProfileCard(
+                    svgImage: model.preferencez[i].svgImage??"",
+                    title: model.preferencez[i].title??"",
+                    child: Transform.scale(
+                      scale: 0.7,
+                      child: CupertinoSwitch(
+                        value: false,
+                        onChanged: (v){},
+                        activeColor: context.theme.primaryColor,
+                      ),
+                    ),
+                  )
               ),
               20.0.sbH,
               AppText("Others".toUpperCase(), size: 14,),
