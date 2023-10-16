@@ -16,7 +16,9 @@ class HomePageViewModel extends BaseViewModel{
 
   late BuildContext context;
 
-
+  navigateToDraw(){
+    navigationService.navigateTo(drawEntryPointRoute);
+  }
 
   setAsHidden() async {
     bool changedValue = userService.hideDetails;
