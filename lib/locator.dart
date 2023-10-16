@@ -14,6 +14,7 @@ import 'UI/home/navigations/home/drawer/drawer.vm.dart';
 import 'UI/home/navigations/home/home.vm.dart';
 import 'UI/home/navigations/profile/edit_profile/edit.profile.vm.dart';
 import 'UI/home/navigations/profile/profile.home.vm.dart';
+import 'UI/home/navigations/wallet/wallet_deposit.vm.dart';
 import 'core/cache/sharedpreferences.dart';
 import 'core/repository/repository.dart';
 import 'core/services/local_services/app-cache.dart';
@@ -64,6 +65,7 @@ void registerViewModels() {
   locator.registerFactory<ChangePasswordViewModel>(() => ChangePasswordViewModel());
   locator.registerFactory<DrawEntryPointViewModel>(() => DrawEntryPointViewModel());
   locator.registerFactory<UseBiometricViewModel>(() => UseBiometricViewModel());
+  locator.registerFactory<WalletDepositViewModel>(() => WalletDepositViewModel());
 
 
 }
