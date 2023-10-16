@@ -55,6 +55,12 @@ connect() {
         String errorMessage = error.isEmpty? jsonDecode(e.response!.data)['exception']: formatErrorMessageList(convertDynamicListToStringList(jsonDecode(e.response!.data)['messages']));
         showCustomToast(errorMessage);
 
+        // if(errorMessage=="Authentication Failed."){
+        //   storageService.deleteAllItems();
+        //   locator<SharedPreference>().clear();
+        //   navigationService.navigateToAndRemoveUntil(loginRoute);
+        // }
+
         if(e.response?.statusCode==401){
           String? val = await storageService.readItem(key: expiryDate);
           if(val!=null){
@@ -77,6 +83,9 @@ connect() {
                 return handler.next(e);
               }
             }else{
+              storageService.deleteAllItems();
+              locator<SharedPreference>().clear();
+              navigationService.navigateToAndRemoveUntil(loginRoute);
               return handler.next(e);
             }
           }else{

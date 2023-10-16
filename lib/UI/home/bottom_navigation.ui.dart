@@ -25,31 +25,17 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen>  with S
 
       },
       builder: (_, model, child) {
-        return Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
-            SafeArea(
-              bottom: true,
-              top: false,
-              child: Scaffold(
-                body: model.pages[model.currentIndex],
-              ),
-            ),
-            _BottomNavigationBar(
-              onItemSelected: model.changePage,
-            ),
-            SafeArea(
-              bottom: true,
-              child: Padding(
-                padding: 30.0.padB,
-                child: FloatingActionButton(
-                  onPressed: model.navigateToDraw,
-                  backgroundColor: primaryColor,
-                  child: SvgPicture.asset(AppImages.stars, height: 24, width: 24, color: Colors.black, fit: BoxFit.cover,),
-                ),
-              ),
-            ),
-          ],
+        return Scaffold(
+          body: model.pages[model.currentIndex],
+          bottomNavigationBar: _BottomNavigationBar(
+            onItemSelected: model.changePage,
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: model.navigateToDraw,
+            backgroundColor: primaryColor,
+            child: SvgPicture.asset(AppImages.stars, height: 24, width: 24, color: Colors.black, fit: BoxFit.cover,),
+          ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         );
       },
     );
