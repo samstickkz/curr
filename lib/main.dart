@@ -28,7 +28,7 @@ void main() async {
     statusBarIconBrightness: Brightness.light,
   ));
 
-  runApp(MyApp()); // Pass the email to the MyApp widget
+  runApp(const MyApp()); // Pass the email to the MyApp widget
 }
 
 class MyApp extends StatelessWidget {

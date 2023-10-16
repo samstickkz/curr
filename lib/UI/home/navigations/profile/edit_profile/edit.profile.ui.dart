@@ -34,22 +34,32 @@ class EditProfileScreen extends StatelessWidget {
                     child: Container(
                       height: 100, width: 100,
                       alignment: Alignment.bottomCenter,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        image: DecorationImage(
+                        image: model.files.value.isNotEmpty? null: const DecorationImage(
                           image: CachedNetworkImageProvider(AppString.profilePic)
                         )
                       ),
-                      child: GestureDetector(
-                        onTap: (){},
-                        child: Container(
-                          height: 30,
-                          color: Colors.black.withOpacity(0.5),
-                          child: const Center(
-                            child: Text("EDIT"),
+                      child: Stack(
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          model.files.value.isNotEmpty? Container(
+                            height: height(context),
+                            width: width(context),
+                            child: Image.file(model.files.value.first, fit: BoxFit.cover,),
+                          ):0.0.sbH,
+                          GestureDetector(
+                            onTap: ()=> model.files.value.isEmpty? model.getImage(context): model.removeItem(),
+                            child: Container(
+                              height: 30,
+                              color: Colors.black.withOpacity(0.5),
+                              child: Center(
+                                child: model.files.value.isEmpty? const AppText("EDIT",isBold: true, size: 13,) : const AppText("REMOVE",isBold: true, size: 13,),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
+                        ],
+                      )
                     ),
                   ),
                 ],
