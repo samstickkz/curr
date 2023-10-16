@@ -1,9 +1,12 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:curr/core/models/user.dart';
 import 'package:curr/utils/snack_message.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:http_parser/http_parser.dart';
+import 'package:mime/mime.dart';
 
 import '../../../constants/constants.dart';
 import '../../../constants/reuseables.dart';
@@ -45,23 +48,21 @@ class AuthenticationApiService {
     required String firstName,
     required String lastName,
     required String phoneNumber,
-    String? image,
+    File? image,
     bool? deletePrevious,
   }) async {
     try {
-      var response = await connect().put("personal/profile", data: image!=null?{
-        "id": userService.userCredentials.id,
-        "firstName": firstName,
-        "lastName": lastName,
-        "email": email,
-        "phoneNumber": phoneNumber,
-        "image": {
-          "name": "<string>",
-          "extension": "<string>",
-          "data": "<string>"
-        },
-        "deleteCurrentImage": deletePrevious??false
-      }:{
+      FormData formData = FormData();
+      if(image!=null){
+        formData.fields.add(MapEntry('id', userService.userCredentials.id??""));
+        formData.fields.add(MapEntry('firstName', firstName));
+        formData.fields.add(MapEntry('lastName', lastName));
+        formData.fields.add(MapEntry('email', email));
+        formData.fields.add(MapEntry('phoneNumber', phoneNumber));
+        // formData.fields.add(MapEntry('deleteCurrentImage', (deletePrevious??false) as String));
+        formData.files.add(MapEntry('file', await MultipartFile.fromFile(image.path, contentType:MediaType("image", "jpeg"))));
+      }
+      var response = await connect().put("personal/profile", data: image!=null?formData:{
         "id": userService.userCredentials.id,
         "firstName": firstName,
         "lastName": lastName,

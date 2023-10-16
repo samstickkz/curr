@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:curr/constants/constants.dart';
 import 'package:curr/utils/dartz.x.dart';
 import 'package:dartz/dartz.dart';
@@ -50,7 +52,7 @@ class Repository {
     required String firstName,
     required String lastName,
     required String phoneNumber,
-    String? image,
+    File? image,
     bool? deletePrevious,
   }) async {
     return await authApi.updateProfile(email: email, username: username, firstName: firstName, lastName: lastName, phoneNumber: phoneNumber, image: image, deletePrevious: deletePrevious);
@@ -70,12 +72,17 @@ class Repository {
     print(response);
     if(response.isRight()){
       LoginResponse res = response.asRight();
-      storageService.storeItem(key: accessToken, value: res.token);
-      storageService.storeItem(key: refreshToken, value: res.refreshToken);
-      storageService.storeItem(key: expiryDate, value: res.refreshTokenExpiryTime);
+      await saveTokens(res);
       print(await storageService.readItem(key: accessToken));
     }
     return response;
+  }
+
+  saveTokens(LoginResponse res)async{
+    print("Here");
+    storageService.storeItem(key: accessToken, value: res.token);
+    storageService.storeItem(key: refreshToken, value: res.refreshToken);
+    storageService.storeItem(key: expiryDate, value: res.refreshTokenExpiryTime);
   }
 
   Future<User?> getUser()async{

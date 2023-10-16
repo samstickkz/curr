@@ -1,14 +1,12 @@
 import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:curr/utils/widget_extensions.dart';
-import 'package:curr/widgets/app_button.dart';
 import 'package:curr/widgets/apptexts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../constants/constants.dart';
 import '../../../constants/reuseables.dart';
-import '../../../routes/routes.dart';
 import '../../../utils/snack_message.dart';
 import '../../base.ui.dart';
 import 'biometric.vm.dart';
@@ -49,9 +47,6 @@ class UseBiometricScreen extends StatelessWidget {
                         : AppImages.fingerprint,
                     label: isIOS ? "Face ID" : "Fingerprint",
                     onTap: () async {
-
-
-
                       if (isIOS) {
                         await model.authenticate();
                       } else {

@@ -3,6 +3,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:local_auth/local_auth.dart';
 
 import '../../../routes/routes.dart';
+import '../../../utils/snack_message.dart';
 
 class UseBiometricViewModel extends BaseViewModel{
 
@@ -18,6 +19,7 @@ class UseBiometricViewModel extends BaseViewModel{
   }
 
   Future<void> authenticate() async {
+    print("auth area");
     bool authenticated = false;
     try {
       authenticated = await localAuthentication.authenticate(
@@ -28,6 +30,7 @@ class UseBiometricViewModel extends BaseViewModel{
             useErrorDialogs: true,
           ));
     } catch (e) {
+      showCustomToast(e.toString());
       notifyListeners();
     }
 
