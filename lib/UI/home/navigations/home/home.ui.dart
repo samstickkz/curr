@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           AppText(
-                            'Welcome ${model.userService.userCredentials.name??""}',
+                            'Welcome ${model.userService.userCredentials.firstName??""} ${model.userService.userCredentials.lastName??""}',
                           ),
                           16.0.sbW,
                         ],
