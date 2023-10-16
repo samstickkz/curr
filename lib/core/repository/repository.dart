@@ -72,7 +72,9 @@ class Repository {
     print(response);
     if(response.isRight()){
       LoginResponse res = response.asRight();
-      await saveTokens(res);
+      if(res.token!=null){
+        await saveTokens(res);
+      }
       print(await storageService.readItem(key: accessToken));
     }
     return response;

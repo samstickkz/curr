@@ -46,7 +46,11 @@ class Initializer {
       if(userVal==null){
         await locator<UserService>().getLocalUser();
       }else{
-        await locator<UserService>().getLocalUser(user: User.fromJson(jsonDecode(userVal)));
+        try{
+          await locator<UserService>().getLocalUser(user: User.fromJson(jsonDecode(userVal)));
+        }catch(err){
+          storageService.deleteAllItems();
+        }
       }
     }else{
       isLoggedIn = false;
