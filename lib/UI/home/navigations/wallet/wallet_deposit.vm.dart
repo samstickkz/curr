@@ -35,7 +35,6 @@ class WalletDepositViewModel extends BaseViewModel{
           scrollOffset = 0.0;
         }
       }
-      notifyListeners();
     });
   }
 

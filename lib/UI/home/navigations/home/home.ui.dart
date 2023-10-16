@@ -23,8 +23,10 @@ class HomePage extends StatelessWidget {
       },
       builder: (_, model, child)=> Scaffold(
         // appBar: ,
-        drawer: const Drawer(
-          child: DrawerScreen(),
+        drawer: Drawer(
+          child: DrawerScreen(
+            drawer: model.navigateToDraw,
+          ),
         ),
         body: Column(
           children: [

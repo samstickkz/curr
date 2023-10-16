@@ -14,7 +14,8 @@ import 'drawer.vm.dart';
 import 'raffle/raflle.ui.dart';
 
 class DrawerScreen extends StatelessWidget {
-  const DrawerScreen({Key? key}) : super(key: key);
+  final VoidCallback drawer;
+  const DrawerScreen({Key? key, required this.drawer}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +26,13 @@ class DrawerScreen extends StatelessWidget {
           Column(
             children: [
               70.0.sbH,
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CircleAvatar(
-                    backgroundImage: CachedNetworkImageProvider("${userService.userCredentials.imageUrl}"),
                     radius: 60,
-                  )
+                    backgroundImage: CachedNetworkImageProvider(AppString.profilePic),
+                  ),
                 ],
               ),
               16.0.sbH,
@@ -128,9 +129,7 @@ class DrawerScreen extends StatelessWidget {
               ),
               //Payments
               InkWell(
-                onTap: () {
-                  Get.to(() => const SpinWheel());
-                },
+                onTap: drawer,
                 child: ListTile(
                   leading: const Icon(
                     Icons.wind_power,
